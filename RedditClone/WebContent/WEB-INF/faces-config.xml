@@ -17,5 +17,13 @@
 			<to-view-id>/logout.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>
+	<navigation-rule>
+		<display-name>logout.xhtml</display-name>
+		<from-view-id>/logout.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>logout</from-outcome>
+			<to-view-id>/login.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
 
 </faces-config>

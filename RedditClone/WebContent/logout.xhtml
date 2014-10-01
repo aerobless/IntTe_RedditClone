@@ -7,10 +7,12 @@
 <title>User Status Page Temp</title>
 </head>
 <body>
-	<h:panelGrid border="1" columns="3">
-		<h:outputText value="Hello"></h:outputText>
-		<h:outputText value="#{loginBean.name}"></h:outputText>
-		<h:commandButton action="logout" value="Logout"></h:commandButton>
-	</h:panelGrid>
+	<h:form>
+		<h:panelGrid border="1" columns="6">
+			<h:outputText value="Hello"></h:outputText>
+			<h:outputText value="#{loginBean.name}"></h:outputText>
+			<h:commandButton value="Logout" action="logout"></h:commandButton>
+		</h:panelGrid>
+	</h:form>
 </body>
 </html>
