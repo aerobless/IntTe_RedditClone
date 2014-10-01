@@ -55,6 +55,7 @@ public class UserBean {
 		}
 		return "ok";
 	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -87,6 +88,4 @@ public class UserBean {
 			return false;
 		return true;
 	}
-	
-
 }
