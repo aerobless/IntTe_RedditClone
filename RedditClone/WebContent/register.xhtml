@@ -13,7 +13,7 @@
 			<h:inputText value="#{userBean.name}" pt:placeholder="Username"></h:inputText>
 			<h:inputSecret value="#{userBean.password}" pt:placeholder="Password"></h:inputSecret>
 			<h:inputSecret value="#{userBean.password}" pt:placeholder="Repeat Password"></h:inputSecret>
-			<h:commandButton value="Register" action="addUser"></h:commandButton>
+			<h:commandButton value="Register" action="#{userBean.test}"></h:commandButton>
 		</h:panelGrid>
 	</h:form>
 </body>

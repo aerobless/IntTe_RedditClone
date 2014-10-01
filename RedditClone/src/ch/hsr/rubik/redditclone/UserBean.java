@@ -1,5 +1,9 @@
 package ch.hsr.rubik.redditclone;
 
+import java.io.IOException;
+
+import javax.faces.context.FacesContext;
+
 public class UserBean {
 	private String name;
 	private String password;
@@ -15,6 +19,16 @@ public class UserBean {
 	}
 	public void setPassword(String password){
 		this.password = password;
+	}
+	
+	public void test() {
+		System.out.println("Hello world");
+		try {
+			FacesContext.getCurrentInstance().getExternalContext().redirect("login.xhtml");
+		} catch (IOException anEx) {
+			// TODO Auto-generated catch block
+			anEx.printStackTrace();
+		}
 	}
 
 }
