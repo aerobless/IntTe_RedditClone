@@ -8,12 +8,13 @@
 </head>
 <body>
 	<h:form>
-		<h:panelGrid border="0" columns="6">
+		<h:panelGrid border="0" columns="2">
 			<h:outputText value="Username"></h:outputText>
 			<h:inputText value="#{loginBean.name}"></h:inputText>
 			<h:outputText value="Password"></h:outputText>
 			<h:inputSecret value="#{loginBean.password}"></h:inputSecret>
-			<h:commandButton value="Login" action="login"></h:commandButton>
+			<h:outputText value="Repeat Password"></h:outputText>
+			<h:inputSecret value="#{loginBean.password}"></h:inputSecret>
 			<h:commandButton value="Register" action="register"></h:commandButton>
 		</h:panelGrid>
 	</h:form>
