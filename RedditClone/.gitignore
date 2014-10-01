@@ -1,1 +1,10 @@
 /build/
+.metadata
+tmp/**
+tmp/**/*
+local.properties
+.settings/
+.loadpath
+# Locally stored "Eclipse launch configurations"
+*.launch
+
