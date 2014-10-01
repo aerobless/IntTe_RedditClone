@@ -1,27 +1,20 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:p="http://java.sun.com/jsf/html">
+	xmlns:h="http://java.sun.com/jsf/html">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<title>Login Page</title>
+<title>JSF Example - Login Page</title>
 </head>
 <body>
-	<p:panelGrid border="1" columns="6" style="height: 73px; ">
-		<p:outputText value="Username:"></p:outputText>
-		<p:form>
-			<p:inputText value="#{loginBean.name}"></p:inputText>
-		</p:form>
-		<p:outputText value="Password:"></p:outputText>
-		<p:form>
-			<p:inputSecret value="#{loginBean.password}"></p:inputSecret>
-		</p:form>
-		<p:form>
-			<p:commandButton value="Login" action="login"></p:commandButton>
-		</p:form>
-		<p:form>
-			<p:commandButton value="Register" action="register"></p:commandButton>
-		</p:form>
-	</p:panelGrid>
-</body>
+	<h:form>
+		<h:panelGrid border="1" columns="6">
+			<h:outputText value="Username"></h:outputText>
+			<h:inputText value="#{loginBean.name}"></h:inputText>
+			<h:outputText value="Password"></h:outputText>
+			<h:inputSecret value="#{loginBean.password}"></h:inputSecret>
+			<h:commandButton value="Login" action="login"></h:commandButton>
+			<h:commandButton value="Register" action="register"></h:commandButton>
+		</h:panelGrid>
+	</h:form></body>
 </html>
