@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
 	xmlns:h="http://java.sun.com/jsf/html">
+	
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <title>JSF Example - Login Page</title>
@@ -9,10 +11,8 @@
 <body>
 	<h:form>
 		<h:panelGrid border="0" columns="6">
-			<h:outputText value="Username"></h:outputText>
-			<h:inputText value="#{loginBean.name}"></h:inputText>
-			<h:outputText value="Password"></h:outputText>
-			<h:inputSecret value="#{loginBean.password}"></h:inputSecret>
+			<h:inputText value="#{loginBean.name}" pt:placeholder="Username" id="loginField"></h:inputText>
+			<h:inputSecret value="#{loginBean.password}" id="passwordField"></h:inputSecret>
 			<h:commandButton value="Login" action="login"></h:commandButton>
 			<h:commandButton value="Register" action="register"></h:commandButton>
 		</h:panelGrid>
