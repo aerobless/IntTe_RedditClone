@@ -1,6 +1,6 @@
 package ch.hsr.rubik.redditclone;
 
-public class LoginBean {
+public class UserBean {
 	private String name;
 	private String password;
 	

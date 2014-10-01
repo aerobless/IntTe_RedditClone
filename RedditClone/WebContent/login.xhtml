@@ -6,13 +6,13 @@
 	
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<title>JSF Example - Login Page</title>
+<title>Login Page</title>
 </head>
 <body>
 	<h:form>
 		<h:panelGrid border="0" columns="6">
-			<h:inputText value="#{loginBean.name}" pt:placeholder="Username" id="loginField"></h:inputText>
-			<h:inputSecret value="#{loginBean.password}" id="passwordField"></h:inputSecret>
+			<h:inputText value="#{userBean.name}" pt:placeholder="Username" id="loginField"></h:inputText>
+			<h:inputSecret value="#{userBean.password}" id="passwordField"></h:inputSecret>
 			<h:commandButton value="Login" action="login"></h:commandButton>
 			<h:commandButton value="Register" action="register"></h:commandButton>
 		</h:panelGrid>
