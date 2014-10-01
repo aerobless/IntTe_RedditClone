@@ -44,15 +44,18 @@ public class UserBean {
 	public String login() {
 		if(manager.containsUser(this)){
 			System.out.println("user found");
-			try {
-				FacesContext.getCurrentInstance().getExternalContext().redirect("logout.xhtml");
-			} catch (IOException anEx) {
-				// TODO Auto-generated catch block
-				anEx.printStackTrace();
-			}
+			redirect("logout.xhtml");
 		} else {
 			System.out.println("user not found");
 		}
+		
+		//Returning a string is required by methods called from a jsp.
+		return "ok";
+	}
+	
+	public String register(){
+		manager.addUser(this);
+		redirect("logout.xhtml");
 		return "ok";
 	}
 	
@@ -87,5 +90,14 @@ public class UserBean {
 		} else if (!username.equals(other.username))
 			return false;
 		return true;
+	}
+	
+	private void redirect(String pagename){
+		try {
+			FacesContext.getCurrentInstance().getExternalContext().redirect(pagename);
+		} catch (IOException anEx) {
+			// TODO Auto-generated catch block
+			anEx.printStackTrace();
+		}
 	}
 }

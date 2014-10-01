@@ -25,7 +25,12 @@ public class ServerManager {
 	}
 	
 	public boolean containsUser(UserBean user){
-	 return users.contains(user);
+		return users.contains(user);
+	}
+	
+	public void addUser(UserBean user){
+		users.add(user);
+		System.out.println("Added a new user, we're now counting "+users.size()+" in our database.");
 	}
 }
  
