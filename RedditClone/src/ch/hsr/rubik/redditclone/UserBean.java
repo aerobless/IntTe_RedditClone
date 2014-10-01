@@ -5,12 +5,15 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpSession;
 
 @ManagedBean(name="userBean")
 @SessionScoped
 public class UserBean {
-	private String username;
-	private String password;
+	private String username; //req. for equal
+	private String email;
+	private String password; //req. for equal
+	private String passwordConfirm;
 	
 	@ManagedProperty(value="#{serverManager}")
 	private ServerManager manager;
@@ -29,6 +32,22 @@ public class UserBean {
 	}
 	public void setPassword(String password){
 		this.password = password;
+	}
+
+	public final String getEmail() {
+		return email;
+	}
+
+	public final void setEmail(String aEmail) {
+		email = aEmail;
+	}
+
+	public final String getPasswordConfirm() {
+		return passwordConfirm;
+	}
+
+	public final void setPasswordConfirm(String aPasswordConfirm) {
+		passwordConfirm = aPasswordConfirm;
 	}
 	
 	public UserBean() {
@@ -54,9 +73,16 @@ public class UserBean {
 	}
 	
 	public String register(){
-		manager.addUser(this);
-		redirect("logout.xhtml");
-		return "ok";
+		if(verifyRegistrationInput()){
+			manager.addUser(this);
+			redirect("logout.xhtml");
+			return "ok";
+		}
+		return "nok";
+	}
+	
+	private boolean verifyRegistrationInput() {
+		return password.equals(passwordConfirm) && email.contains("@");
 	}
 	
 	@Override
@@ -99,5 +125,12 @@ public class UserBean {
 			// TODO Auto-generated catch block
 			anEx.printStackTrace();
 		}
+	}
+	
+	public String logout(){
+		((HttpSession) FacesContext.getCurrentInstance()
+				   .getExternalContext().getSession(false)).invalidate();
+		redirect("login.xhtml");
+		return "ok";
 	}
 }

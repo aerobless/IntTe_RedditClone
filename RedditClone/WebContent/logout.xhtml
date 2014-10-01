@@ -11,7 +11,7 @@
 		<h:panelGrid border="0" columns="6">
 			<h:outputText value="Hello"></h:outputText>
 			<h:outputText value="#{userBean.name}"></h:outputText>
-			<h:commandButton value="Logout" action="logout"></h:commandButton>
+			<h:commandButton value="Logout" action="#{userBean.logout}"></h:commandButton>
 		</h:panelGrid>
 	</h:form>
 </body>
