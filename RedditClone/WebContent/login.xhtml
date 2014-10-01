@@ -7,11 +7,14 @@
 <title>Login Page</title>
 </head>
 <body>
-	<p:panelGrid border="1" columns="4" style="height: 73px; ">
+	<p:panelGrid border="1" columns="6" style="height: 73px; ">
+		<p:outputText value="Username:"></p:outputText>
 		<p:form>
-			<p:inputText></p:inputText>
-		</p:form><p:form>
-			<p:inputSecret></p:inputSecret>
+			<p:inputText value="#{loginBean.name}"></p:inputText>
+		</p:form>
+		<p:outputText value="Password:"></p:outputText>
+		<p:form>
+			<p:inputSecret value="#{loginBean.password}"></p:inputSecret>
 		</p:form>
 		<p:form>
 			<p:commandButton value="Login" action="login"></p:commandButton>
