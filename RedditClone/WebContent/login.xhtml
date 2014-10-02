@@ -11,14 +11,21 @@
     <link href="/RedditClone/css/bootstrap.min.css" rel="stylesheet" media="screen"/>
 </head>
 <body>
-	<h:form>
-		<h:panelGrid border="0" columns="6">
-			<h:inputText value="#{userBean.name}" pt:placeholder="Username" id="loginField"></h:inputText>
-			<h:inputSecret value="#{userBean.password}" id="passwordField"></h:inputSecret>
-			<h:commandButton value="Login" action="#{userBean.login}"></h:commandButton>
-			<h:commandButton value="Register" action="register"></h:commandButton>
-		</h:panelGrid>
-	</h:form>
+    <div class="navbar navbar-fixed-top">
+        <div class="navbar-inner">
+            <div class="container">
+                <a href="https://github.com/aerobless/IntTe_RedditClone" class="brand">RedditClone</a>
+                <h:form styleClass="navbar-form navbar-right">
+					<h:panelGrid border="0" columns="6">
+						<h:inputText value="#{userBean.name}" pt:placeholder="Username" id="loginField"></h:inputText>
+						<h:inputSecret value="#{userBean.password}" id="passwordField"></h:inputSecret>
+						<h:commandButton value="Login" action="#{userBean.login}" styleClass='btn btn-default navbar-btn'></h:commandButton>
+						<h:commandButton value="Register" action="register" styleClass='btn btn-default navbar-btn'></h:commandButton>
+					</h:panelGrid>
+				</h:form>
+            </div>
+        </div>
+    </div>
 	<script src="/RedditClone/js/bootstrap.min.js"></script>
 </body>
 </html>
