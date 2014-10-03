@@ -1,0 +1,16 @@
+<ui:composition
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+	
+	<h:panelGrid border="0" columns="1">
+			<h:inputText value="#{submissionBean.title}" pt:placeholder="Title"></h:inputText>
+			<h:inputText value="#{submissionBean.url}" pt:placeholder="http://"></h:inputText>
+			<h:commandButton value="Submit new link" styleClass='btn btn-default'>
+				<f:ajax execute="@all" listener="#{}" render="@all"/>
+			</h:commandButton>
+		</h:panelGrid>
+		
+</ui:composition>

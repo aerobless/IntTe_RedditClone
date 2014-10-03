@@ -3,7 +3,11 @@ package ch.hsr.rubik.redditclone;
 import java.util.ArrayList;
 import java.util.Date;
 
-//TODO: Idk if this will really be a bean yet
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
+
+@ManagedBean(name="submissionBean")
+@SessionScoped
 public class SubmissionBean {
 	private String url;
 	private String title;
