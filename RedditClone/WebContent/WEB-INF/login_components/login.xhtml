@@ -1,0 +1,34 @@
+<ui:composition
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+	
+	<h:outputScript name="jsf.js" library="javax.faces" target="head" />
+    <h:form styleClass="navbar-form navbar-right" prependId="false" id="userPanel">
+			<h:panelGrid border="0" columns="6">
+				<!-- USER NOT LOGEDD IN -->
+				<h:panelGroup rendered="#{userBean.loginRequired}" id="loginRequiredGroup">
+					<h:inputText value="#{userBean.username}" pt:placeholder="Username" id="loginField"></h:inputText>
+					<h:inputSecret value="#{userBean.password}" id="passwordField"></h:inputSecret>
+					<h:commandButton value="Login" styleClass='btn btn-default navbar-btn'>
+						<!-- execute="@all" saves the values of all fields in the bean, the listener calls the method
+						login inside the userBean bean and the render flag tells the userInfoContainer to render
+						the component again. It's important that we always render the next higher level component. -->
+						<f:ajax execute="@all" listener="#{userBean.login}" render="userPanel"/>
+					</h:commandButton>
+					<h:commandButton value="Register" action="register" styleClass='btn btn-default navbar-btn'></h:commandButton>
+				</h:panelGroup>
+				
+				<!-- USER LOGEDD IN -->
+				<h:panelGroup rendered="#{userBean.loggedIn}" id="loggedInGroup">
+					<h:outputText value="Hello "></h:outputText>
+					<h:outputText value="#{userBean.username}"></h:outputText>
+					<h:commandButton value="Logout" action="#{userBean.logout}" styleClass='btn btn-default navbar-btn'></h:commandButton>
+				</h:panelGroup>
+							
+		</h:panelGrid>
+	</h:form>
+	<script src="/RedditClone/js/bootstrap.min.js"></script>
+</ui:composition>

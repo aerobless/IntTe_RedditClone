@@ -12,7 +12,17 @@
     </h:head>
     <h:body>
         <div id="header">
-        	 <ui:include src="/WEB-INF/login.xhtml" /> 
+        	<div class="navbar navbar-fixed-top">
+	        	<div class="navbar-inner">
+	            	<div class="container">
+	                	<a href="https://github.com/aerobless/IntTe_RedditClone" class="brand">RedditClone</a>
+	                	<ui:include src="/WEB-INF/login_components/login.xhtml" />
+	            	</div>
+	        	</div>
+	        	<div>
+	       			<h:messages styleClass="alert alert-error" globalOnly="true" /> <!-- Global messages -->
+	   			</div>
+	    	</div>
         </div>
         <div id="menu">Menu</div>
         <div id="content"><ui:insert name="content">Default content</ui:insert></div>

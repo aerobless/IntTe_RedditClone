@@ -1,20 +1,24 @@
 package ch.hsr.rubik.redditclone;
 import java.io.IOException;
+import java.io.Serializable;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
+import javax.faces.event.AjaxBehaviorEvent;
 import javax.servlet.http.HttpSession;
 
 @ManagedBean(name="userBean")
 @SessionScoped
-public class UserBean {
+public class UserBean implements Serializable{
+	private static final long serialVersionUID = 1691077872888494747L;
 	private String username; //req. for equal
 	private String email;
 	private String password; //req. for equal
 	private String passwordConfirm;
+	private boolean loginRequired;
 	
 	@ManagedProperty(value="#{serverManager}")
 	private ServerManager manager;
@@ -22,10 +26,10 @@ public class UserBean {
 	public final void setManager(ServerManager aManager) {
 		manager = aManager;
 	}
-	public String getName(){
+	public String getUsername(){
 		return username;
 	}
-	public void setName(String name){
+	public void setUsername(String name){
 		this.username = name;
 	}
 	public String getPassword() {
@@ -53,6 +57,7 @@ public class UserBean {
 	
 	public UserBean() {
 		super();
+		loginRequired = true;
 	}
 
 	public UserBean(String aName, String aPassword) {
@@ -61,18 +66,21 @@ public class UserBean {
 		password = aPassword;
 	}
 	
-	public String login() {
+	public void login(AjaxBehaviorEvent event) {
+		System.out.println(username+" "+password);
 		if(manager.containsUser(this)){
 			System.out.println("user found");
-			redirect("logout.xhtml");
+			setLoginRequired(false);
 		} else {
 			System.out.println("user not found");
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Username or password is incorrect"));
 		}
-		
-		//Returning a string is required by methods called from a jsp.
-		return "ok";
 	}
+	
+    public void handleEvent(AjaxBehaviorEvent event) {
+        System.out.println("ajax call");
+       
+    }
 	
 	public String register(){
 		if(verifyRegistrationInput()){
@@ -132,7 +140,31 @@ public class UserBean {
 	public String logout(){
 		((HttpSession) FacesContext.getCurrentInstance()
 				   .getExternalContext().getSession(false)).invalidate();
-		redirect("login.xhtml");
+		redirect("site.xhtml");
 		return "ok";
+	}
+	/**
+	 * @return the loggedIn
+	 */
+	public boolean isLoginRequired() {
+		return loginRequired;
+	}
+	/**
+	 * @param aLoggedIn the loggedIn to set
+	 */
+	public void setLoginRequired(boolean aLoggedIn) {
+		loginRequired = aLoggedIn;
+	}
+	/**
+	 * @return the loggedIn
+	 */
+	public boolean isLoggedIn() {
+		return !loginRequired;
+	}
+	/**
+	 * @param aLoggedIn the loggedIn to set
+	 */
+	public void setLoggedIn(boolean aLoggedIn) {
+		loginRequired = !aLoggedIn;
 	}
 }
