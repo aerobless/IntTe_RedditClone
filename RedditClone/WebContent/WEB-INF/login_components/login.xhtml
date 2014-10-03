@@ -21,6 +21,7 @@
 				 -->
 				<f:ajax execute="@all" listener="#{userBean.login}" render="@all"/>
 			</h:commandButton>
+			&#160; <!-- ugly fix for now -->
 			<h:commandButton value="Register" styleClass='btn btn-default navbar-btn'>
 				<f:ajax listener="#{userBean.showRegisterPanel}" render="@all"/>
 			</h:commandButton>
