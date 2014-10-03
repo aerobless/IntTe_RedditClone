@@ -1,6 +1,7 @@
 package ch.hsr.rubik.redditclone;
 import java.io.IOException;
 
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
@@ -66,6 +67,7 @@ public class UserBean {
 			redirect("logout.xhtml");
 		} else {
 			System.out.println("user not found");
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Username or password is incorrect"));
 		}
 		
 		//Returning a string is required by methods called from a jsp.
