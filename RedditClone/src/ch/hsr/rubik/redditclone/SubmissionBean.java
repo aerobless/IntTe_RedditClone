@@ -17,4 +17,88 @@ public class SubmissionBean {
 		// TODO Auto-generated constructor stub
 	}
 
+	/**
+	 * @return the url
+	 */
+	public final String getUrl() {
+		return url;
+	}
+
+	/**
+	 * @param aUrl the url to set
+	 */
+	public final void setUrl(String aUrl) {
+		url = aUrl;
+	}
+
+	/**
+	 * @return the title
+	 */
+	public final String getTitle() {
+		return title;
+	}
+
+	/**
+	 * @param aTitle the title to set
+	 */
+	public final void setTitle(String aTitle) {
+		title = aTitle;
+	}
+
+	/**
+	 * @return the submissionDate
+	 */
+	public final Date getSubmissionDate() {
+		return submissionDate;
+	}
+
+	/**
+	 * @param aSubmissionDate the submissionDate to set
+	 */
+	public final void setSubmissionDate(Date aSubmissionDate) {
+		submissionDate = aSubmissionDate;
+	}
+
+	/**
+	 * @return the submittedByUser
+	 */
+	public final String getSubmittedByUser() {
+		return submittedByUser;
+	}
+
+	/**
+	 * @param aSubmittedByUser the submittedByUser to set
+	 */
+	public final void setSubmittedByUser(String aSubmittedByUser) {
+		submittedByUser = aSubmittedByUser;
+	}
+
+	/**
+	 * @return the votes
+	 */
+	public final int getVotes() {
+		return votes;
+	}
+
+	/**
+	 * @param aVotes the votes to set
+	 */
+	public final void setVotes(int aVotes) {
+		votes = aVotes;
+	}
+
+	/**
+	 * @return the comments
+	 */
+	public final ArrayList<CommentBean> getComments() {
+		return comments;
+	}
+
+	/**
+	 * @param aComments the comments to set
+	 */
+	public final void setComments(ArrayList<CommentBean> aComments) {
+		comments = aComments;
+	}
+	
 }
