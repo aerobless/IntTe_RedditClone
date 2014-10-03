@@ -1,6 +1,7 @@
 package ch.hsr.rubik.redditclone;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
@@ -14,14 +15,23 @@ import javax.faces.bean.ManagedBean;
 @ApplicationScoped
 public class ServerManager {
 	ArrayList<UserBean> users = new ArrayList<UserBean>();
+	ArrayList<SubmissionBean> submissions = new ArrayList<SubmissionBean>();
 
 	public ServerManager() {
 		super();
 		System.out.println("Loading users from disk..");
 		//TODO: actual save-to-xml / load-from-xml methods and demo data.
+		loadDemoData();
+	}
+
+	private void loadDemoData() {
 		users.add(new UserBean("theo", "123456"));
 		users.add(new UserBean("marco", "123456"));
 		users.add(new UserBean("daniela", "123456"));
+		
+		submissions.add(new SubmissionBean("http://www.google.com","A cool new search engine",new Date(), "theo"));
+		submissions.add(new SubmissionBean("http://www.apple.com","A company that sells awesome computers",new Date(), "marco"));
+		submissions.add(new SubmissionBean("http://www.reddit.com","Like RedditClone but not as good looking..",new Date(), "theo"));
 	}
 	
 	public boolean containsUser(UserBean user){

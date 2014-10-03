@@ -14,7 +14,25 @@ public class SubmissionBean {
 	private ArrayList<CommentBean> comments;
 
 	public SubmissionBean() {
-		// TODO Auto-generated constructor stub
+		
+	}
+
+	/**
+	 * Creates a new instance of this class.
+	 *
+	 * @param aUrl
+	 * @param aTitle
+	 * @param aSubmissionDate
+	 * @param aSubmittedByUser
+	 */
+	public SubmissionBean(String aUrl, String aTitle, Date aSubmissionDate,
+			String aSubmittedByUser) {
+		super();
+		url = aUrl;
+		title = aTitle;
+		submissionDate = aSubmissionDate;
+		submittedByUser = aSubmittedByUser;
+		votes = 0;
 	}
 
 	/**
