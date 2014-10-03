@@ -13,7 +13,8 @@
 			<h:inputText value="#{userBean.email}" pt:placeholder="Email"></h:inputText>
 			<h:inputSecret value="#{userBean.password}" pt:placeholder="Password"></h:inputSecret>
 			<h:inputSecret value="#{userBean.passwordConfirm}" pt:placeholder="Confirm Password"></h:inputSecret>
-			<h:commandButton value="Register" styleClass='btn btn-default'>
+			<h:commandButton value="Register account" styleClass='btn btn-default'>
+				<f:ajax execute="@all" listener="#{userBean.addNewUser}" render="@all"/>
 			</h:commandButton>
 		</h:panelGrid>
 	</h:form>

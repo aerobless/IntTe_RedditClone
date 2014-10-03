@@ -95,13 +95,14 @@ public class UserBean implements Serializable{
     	setShowWelcome(true);
     }
 	
-	public String register(){
+	public void addNewUser(AjaxBehaviorEvent event){
+		System.out.println("user added");
 		if(verifyRegistrationInput()){
 			manager.addUser(this);
-			redirect("logout.xhtml");
-			return "ok";
+			setShowWelcome(true);
+			setLoggedIn(true);
+			System.out.println("all done");
 		}
-		return "nok";
 	}
 	
 	private boolean verifyRegistrationInput() {
