@@ -16,14 +16,21 @@
 
     <ui:define name="content">
 		 <!-- Main jumbotron for a primary marketing message or call to action -->
-	    <div class="jumbotron color_grey">
-	      <div class="container">
-	        <h1>Hello, world!</h1>
-	        <p>This is some random text that will be removed sometime in the future.. or not. Maybe it will stay for
-	        all eternity. Reddit is cool. This site is cool. I'm running out of things to write.. are you still
-	        seriously reading this? It would be better if you were coding instead..</p>
-	        <p><a class="btn btn-primary btn-lg" role="button">Learn more  </a></p>
-	      </div>
+	    <div class="jumbotron color_grey" id="jumbotron">
+	    	<h:panelGroup rendered="#{userBean.showWelcome}" id="welcomeContainer">
+	      		<div class="container">
+	        		<h1>Hello, world!</h1>
+	        		<p>This is some random text that will be removed sometime in the future.. or not. Maybe it will stay for
+	        			all eternity. Reddit is cool. This site is cool. I'm running out of things to write.. are you
+	        			seriously still reading this? It would be better if you were coding instead..</p>
+	        		<p><a class="btn btn-primary btn-lg" role="button">Learn more  </a></p>
+	      		</div>
+	      	</h:panelGroup>
+	      	<h:panelGroup rendered="#{userBean.showRegister}" id="registerContainer">
+	     		<div class="container">
+	      			<ui:include src="/WEB-INF/login_components/register.xhtml"/>
+	      		</div>
+	      </h:panelGroup>
 	    </div>
     </ui:define>
 </ui:composition>

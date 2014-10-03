@@ -1,24 +1,21 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
+<ui:composition
+	xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
-	xmlns:h="http://java.sun.com/jsf/html">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<title>Register Page</title>
- <!-- Bootstrap -->
-    <link href="/RedditClone/css/bootstrap.min.css" rel="stylesheet" media="screen"/>
-</head>
-<body>
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+	
 	<h:form>
 		<h:panelGrid border="0" columns="1">
-			<h:inputText value="#{userBean.name}" pt:placeholder="Username"></h:inputText>
+			<h1>Register today! And win a free iPad!</h1>
+			<p>Register today and you get a chance to win a free iPad while we empty your credit card. Just kidding. Also there's no free iPad. :(</p>
+			<h:inputText value="#{userBean.username}" pt:placeholder="Username"></h:inputText>
 			<h:inputText value="#{userBean.email}" pt:placeholder="Email"></h:inputText>
 			<h:inputSecret value="#{userBean.password}" pt:placeholder="Password"></h:inputSecret>
 			<h:inputSecret value="#{userBean.passwordConfirm}" pt:placeholder="Confirm Password"></h:inputSecret>
-			<h:commandButton value="Register" action="#{userBean.register}"></h:commandButton>
+			<h:commandButton value="Register" styleClass='btn btn-default'>
+			</h:commandButton>
 		</h:panelGrid>
 	</h:form>
-	<script src="/RedditClone/js/bootstrap.min.js"></script>
-</body>
-</html>
+
+</ui:composition>

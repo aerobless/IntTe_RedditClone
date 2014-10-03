@@ -16,10 +16,14 @@
 			<h:commandButton value="Login" styleClass='btn btn-default navbar-btn'>
 				<!-- execute="@all" saves the values of all fields in the bean, the listener calls the method
 				login inside the userBean bean and the render flag tells the userInfoContainer to render
-				the component again. It's important that we always render the next higher level component. -->
-				<f:ajax execute="@all" listener="#{userBean.login}" render="userPanel"/>
+				the component again. It's important that we always render the next higher level component.
+				Edit: Switched to using @all so that we can remove the register info if the person clicked that
+				 -->
+				<f:ajax execute="@all" listener="#{userBean.login}" render="@all"/>
 			</h:commandButton>
-			<h:commandButton value="Register" action="register" styleClass='btn btn-default navbar-btn'></h:commandButton>
+			<h:commandButton value="Register" styleClass='btn btn-default navbar-btn'>
+				<f:ajax listener="#{userBean.showRegisterPanel}" render="@all"/>
+			</h:commandButton>
 		</h:panelGroup>
 		
 		<!-- USER LOGEDD IN -->

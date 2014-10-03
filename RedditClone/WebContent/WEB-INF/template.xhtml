@@ -13,7 +13,7 @@
     	 <!-- Custom styles for this template -->
     	<link href="/RedditClone/css/redditClone.css" rel="stylesheet"/>
     </h:head>
-    <h:body>
+    <h:body id="body">
         <div id="header">
         	<div class="navbar navbar-inverse navbar-fixed-top">
 	        	<div class="navbar-inner">
@@ -27,11 +27,12 @@
 	   			</div>
 	    	</div>
         </div>
-        <div id="content"><ui:insert name="content">Default content</ui:insert></div>
-        
+        <div id="centerContent">
+        	<ui:insert name="content">Default content</ui:insert>
+        </div>  
         <div id="footer" class="container">
      		<hr></hr>
-        	© Daniela Peter, Marco Syfrig, Theo Winter 2014 (Footer)
+        	© Daniela Peter, Marco Syfrig, Theo Winter 2014
         </div>
         <script src="/RedditClone/js/bootstrap.min.js"></script>
     </h:body>

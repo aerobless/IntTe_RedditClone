@@ -18,7 +18,10 @@ public class UserBean implements Serializable{
 	private String email;
 	private String password; //req. for equal
 	private String passwordConfirm;
+	
+	//Switches
 	private boolean loginRequired;
+	private boolean showWelcome;
 	
 	@ManagedProperty(value="#{serverManager}")
 	private ServerManager manager;
@@ -58,6 +61,7 @@ public class UserBean implements Serializable{
 	public UserBean() {
 		super();
 		loginRequired = true;
+		showWelcome = true;
 	}
 
 	public UserBean(String aName, String aPassword) {
@@ -71,6 +75,7 @@ public class UserBean implements Serializable{
 		if(manager.containsUser(this)){
 			System.out.println("user found");
 			setLoginRequired(false);
+			setShowRegister(false);
 		} else {
 			System.out.println("user not found");
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Username or password is incorrect"));
@@ -80,6 +85,14 @@ public class UserBean implements Serializable{
     public void handleEvent(AjaxBehaviorEvent event) {
         System.out.println("ajax call");
        
+    }
+    
+    public void showRegisterPanel(AjaxBehaviorEvent event){
+    	setShowRegister(true);
+    }
+    
+    public void showWelcomePanel(AjaxBehaviorEvent event){
+    	setShowWelcome(true);
     }
 	
 	public String register(){
@@ -166,5 +179,25 @@ public class UserBean implements Serializable{
 	 */
 	public void setLoggedIn(boolean aLoggedIn) {
 		loginRequired = !aLoggedIn;
+	}
+	/**
+	 * @return the showWelcome
+	 */
+	public boolean getShowWelcome() {
+		return showWelcome;
+	}
+	/**
+	 * @param aShowWelcome the showWelcome to set
+	 */
+	public void setShowWelcome(boolean aShowWelcome) {
+		showWelcome = aShowWelcome;
+	}
+	
+	public boolean getShowRegister(){
+		return !showWelcome;
+	}
+	
+	public void setShowRegister(boolean showRegister) {
+		showWelcome = !showRegister;
 	}
 }
