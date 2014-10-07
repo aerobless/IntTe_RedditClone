@@ -21,7 +21,9 @@ public class UserBean implements Serializable{
 	
 	//Switches
 	private boolean loginRequired;
-	private boolean showWelcome;
+	private enum InfoState {WELCOME, REGISTER, SUBMITPOST};
+	private InfoState infoBoxCurrentState;
+
 	
 	@ManagedProperty(value="#{serverManager}")
 	private ServerManager manager;
@@ -61,7 +63,7 @@ public class UserBean implements Serializable{
 	public UserBean() {
 		super();
 		loginRequired = true;
-		showWelcome = true;
+		infoBoxCurrentState = InfoState.WELCOME;
 	}
 
 	public UserBean(String aName, String aPassword) {
@@ -75,7 +77,7 @@ public class UserBean implements Serializable{
 		if(manager.containsUser(this)){
 			System.out.println("user found");
 			setLoginRequired(false);
-			setShowRegister(false);
+			setShowWelcome();
 		} else {
 			System.out.println("user not found");
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Username or password is incorrect"));
@@ -88,18 +90,18 @@ public class UserBean implements Serializable{
     }
     
     public void showRegisterPanel(AjaxBehaviorEvent event){
-    	setShowRegister(true);
+    	setShowRegister();
     }
     
     public void showWelcomePanel(AjaxBehaviorEvent event){
-    	setShowWelcome(true);
+    	setShowWelcome();
     }
 	
 	public void addNewUser(AjaxBehaviorEvent event){
 		System.out.println("user added");
 		if(verifyRegistrationInput()){
 			manager.addUser(this);
-			setShowWelcome(true);
+			setShowWelcome();
 			setLoggedIn(true);
 			System.out.println("all done");
 		}
@@ -185,20 +187,28 @@ public class UserBean implements Serializable{
 	 * @return the showWelcome
 	 */
 	public boolean getShowWelcome() {
-		return showWelcome;
+		return infoBoxCurrentState==InfoState.WELCOME;
 	}
 	/**
 	 * @param aShowWelcome the showWelcome to set
 	 */
-	public void setShowWelcome(boolean aShowWelcome) {
-		showWelcome = aShowWelcome;
+	public void setShowWelcome() {
+		infoBoxCurrentState = InfoState.WELCOME;
 	}
 	
 	public boolean getShowRegister(){
-		return !showWelcome;
+		return infoBoxCurrentState==InfoState.REGISTER;
 	}
 	
-	public void setShowRegister(boolean showRegister) {
-		showWelcome = !showRegister;
+	public void setShowRegister() {
+		infoBoxCurrentState = InfoState.REGISTER;
+	}
+	
+	public boolean getShowSubmitForm(){
+		return infoBoxCurrentState==InfoState.SUBMITPOST;
+	}
+	
+	public void setShowSubmitForm() {
+		infoBoxCurrentState = InfoState.SUBMITPOST;
 	}
 }

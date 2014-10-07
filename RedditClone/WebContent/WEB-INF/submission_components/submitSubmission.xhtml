@@ -9,7 +9,7 @@
 			<h:inputText value="#{submissionBean.title}" pt:placeholder="Title"></h:inputText>
 			<h:inputText value="#{submissionBean.url}" pt:placeholder="http://"></h:inputText>
 			<h:commandButton value="Submit new link" styleClass='btn btn-default'>
-				<f:ajax execute="@all" listener="#{}" render="@all"/>
+				<f:ajax execute="@all" listener="#{userBean.logout}" render="@all"/>
 			</h:commandButton>
 		</h:panelGrid>
 		

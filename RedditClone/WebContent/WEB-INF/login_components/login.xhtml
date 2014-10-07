@@ -29,8 +29,13 @@
 		
 		<!-- USER LOGEDD IN -->
 		<h:panelGroup rendered="#{userBean.loggedIn}" id="loggedInGroup">
-			<h:outputText value="Hello "></h:outputText>
-			<h:outputText value="#{userBean.username}"></h:outputText>
+			<span style="color:White">
+				<h:outputText value="Hello "></h:outputText>
+				<h:outputText value="#{userBean.username}"></h:outputText>
+			</span>
+			&#160; <!-- ugly fix for now -->
+			<h:commandButton value="Submit new link" action="#{userBean.logout}" styleClass='btn btn-success'></h:commandButton>
+			&#160; <!-- ugly fix for now -->
 			<h:commandButton value="Logout" action="#{userBean.logout}" styleClass='btn btn-default navbar-btn'></h:commandButton>
 		</h:panelGroup>
 	</h:form>

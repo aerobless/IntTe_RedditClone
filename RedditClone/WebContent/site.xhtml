@@ -23,14 +23,19 @@
 	        		<p>This is some random text that will be removed sometime in the future.. or not. Maybe it will stay for
 	        			all eternity. Reddit is cool. This site is cool. I'm running out of things to write.. are you
 	        			seriously still reading this? It would be better if you were coding instead..</p>
-	        		<p><a class="btn btn-primary btn-lg" role="button">Learn more  </a></p>
+	        		<p><a class="btn btn-primary btn-lg" role="button" href="https://github.com/aerobless/IntTe_RedditClone">Learn more</a></p>
 	      		</div>
 	      	</h:panelGroup>
 	      	<h:panelGroup rendered="#{userBean.showRegister}" id="registerContainer">
 	     		<div class="container">
 	      			<ui:include src="/WEB-INF/login_components/register.xhtml"/>
 	      		</div>
-	      </h:panelGroup>
+	    	</h:panelGroup>
+	    	<h:panelGroup rendered="#{userBean.showSubmitForm}" id="submitPostContainer">
+	     		<div class="container">
+	      			<ui:include src="/WEB-INF/submission_components/submitSubmission.xhtml"/>
+	      		</div>
+	    	</h:panelGroup>
 	    </div>
     </ui:define>
     
