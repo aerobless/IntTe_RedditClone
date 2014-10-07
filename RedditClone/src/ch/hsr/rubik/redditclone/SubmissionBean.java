@@ -2,9 +2,9 @@ package ch.hsr.rubik.redditclone;
 
 import java.util.ArrayList;
 import java.util.Date;
-
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.event.AjaxBehaviorEvent;
 
 @ManagedBean(name="submissionBean")
 @SessionScoped
@@ -121,6 +121,20 @@ public class SubmissionBean {
 	 */
 	public final void setComments(ArrayList<CommentBean> aComments) {
 		comments = aComments;
+	}
+	
+	public void upvote(AjaxBehaviorEvent event) {
+		//TODO: remember which user voted so that we can prevent ppl from voting multiple times
+		//TODO: prevent votes from going over int limit, maybe even use double instead of int
+		//TODO: color arrow differently when a user has voted
+		setVotes(votes+1);
+	}
+	
+	public void downvote(AjaxBehaviorEvent event) {
+		//TODO: remember which user voted so that we can prevent ppl from voting multiple times
+		//TODO: prevent votes from going over int limit, maybe even use double instead of int
+		//TODO: color arrow differently when a user has voted
+		setVotes(votes-1);
 	}
 	
 }
