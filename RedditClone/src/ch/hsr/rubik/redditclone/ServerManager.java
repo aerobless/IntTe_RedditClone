@@ -2,6 +2,7 @@ package ch.hsr.rubik.redditclone;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
@@ -41,6 +42,10 @@ public class ServerManager {
 	public void addUser(UserBean user){
 		users.add(user);
 		System.out.println("Added a new user, we're now counting "+users.size()+" in our database.");
+	}
+	
+	public List<SubmissionBean> getSubmissions(){
+		return submissions;
 	}
 }
  

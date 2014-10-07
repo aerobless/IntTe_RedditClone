@@ -33,4 +33,14 @@
 	      </h:panelGroup>
 	    </div>
     </ui:define>
+    
+   	<ui:define name="posts">
+   		<ui:repeat value="#{serverManager.submissions}" var="submission">
+        <li>
+            <h:link value="#{submission.title}" outcome="submission">
+                <f:param name="id" value="#{submission.votes}" />
+            </h:link>
+        </li>
+    </ui:repeat>
+    </ui:define>
 </ui:composition>
