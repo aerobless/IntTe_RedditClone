@@ -35,12 +35,22 @@
     </ui:define>
     
    	<ui:define name="posts">
-   		<ui:repeat value="#{serverManager.submissions}" var="submission">
-        <li>
-            <h:link value="#{submission.title}" outcome="submission">
-                <f:param name="id" value="#{submission.votes}" />
-            </h:link>
-        </li>
-    </ui:repeat>
+   	<div class="container">
+		<ui:repeat value="#{serverManager.submissions}" var="submission">
+	        <li class="media no_bullets">
+	            <a class="pull-left" href="#">
+	     		 <img class="media-object" src="..." alt="..."></img>
+	     		 <span class="glyphicon glyphicon-pencil"></span>
+	     		 <i class="glyphicon glyphicon-search"></i>
+	     		 <span class="glyphicon glyphicon-sort-by-attributes"></span>
+	   		    </a>
+	   		    <div class="media-body">
+	            <h4 class="media-heading">
+	            <a href="#{submission.url}">#{submission.title}</a></h4>
+	            submitted #{submission.submissionDate} by #{submission.submittedByUser}
+	           </div>
+	        </li>
+	    </ui:repeat>
+     </div>
     </ui:define>
 </ui:composition>

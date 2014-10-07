@@ -7,3 +7,9 @@ body {
 .color_grey{
     background: #ededed
 }
+
+.no_bullets{
+    list-style-type: none;
+}
+
+background-image: url("#{resource['img/glyphicons-halflings.png']}");
