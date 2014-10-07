@@ -93,6 +93,10 @@ public class UserBean implements Serializable{
     	setShowRegister();
     }
     
+    public void showSubmissionPanel(AjaxBehaviorEvent event){
+    	setShowSubmitForm();
+    }
+    
     public void showWelcomePanel(AjaxBehaviorEvent event){
     	setShowWelcome();
     }

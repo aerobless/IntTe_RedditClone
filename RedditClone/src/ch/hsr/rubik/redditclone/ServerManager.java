@@ -45,6 +45,11 @@ public class ServerManager {
 		System.out.println("Added a new user, we're now counting "+users.size()+" in our database.");
 	}
 	
+	public void addSubmission(SubmissionBean submission){
+		submissions.add(submission);
+		System.out.println("Added a new submission, we're now counting "+submissions.size()+" in our database.");
+	}
+	
 	public List<SubmissionBean> getSubmissions(){
 		return submissions;
 	}

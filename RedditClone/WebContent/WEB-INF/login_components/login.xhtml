@@ -34,7 +34,9 @@
 				<h:outputText value="#{userBean.username}"></h:outputText>
 			</span>
 			&#160; <!-- ugly fix for now -->
-			<h:commandButton value="Submit new link" action="#{userBean.logout}" styleClass='btn btn-success'></h:commandButton>
+			<h:commandButton value="Submit new link" styleClass='btn btn-success'>
+				<f:ajax listener="#{userBean.showSubmissionPanel}" render="@all"/>
+			</h:commandButton>
 			&#160; <!-- ugly fix for now -->
 			<h:commandButton value="Logout" action="#{userBean.logout}" styleClass='btn btn-default navbar-btn'></h:commandButton>
 		</h:panelGroup>
