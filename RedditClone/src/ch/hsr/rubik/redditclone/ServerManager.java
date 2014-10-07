@@ -33,6 +33,7 @@ public class ServerManager {
 		submissions.add(new SubmissionBean("http://www.google.com","A cool new search engine",new Date(), "theo"));
 		submissions.add(new SubmissionBean("http://www.apple.com","A company that sells awesome computers",new Date(), "marco"));
 		submissions.add(new SubmissionBean("http://www.reddit.com","Like RedditClone but not as good looking..",new Date(), "theo"));
+		submissions.add(new SubmissionBean("http://www.reddit.com/r/talesfromtechsupport/comments/2idaug/you_unplugged_your_what/","You unplugged your what?",new Date(), "self.talesfromtechsupport"));
 	}
 	
 	public boolean containsUser(UserBean user){

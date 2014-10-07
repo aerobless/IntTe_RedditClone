@@ -36,7 +36,7 @@ public class SubmissionBean {
 		title = aTitle;
 		submissionDate = aSubmissionDate;
 		submittedByUser = aSubmittedByUser;
-		votes = 0;
+		votes = 1;
 	}
 
 	/**

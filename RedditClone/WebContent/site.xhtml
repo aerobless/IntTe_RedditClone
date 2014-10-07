@@ -38,9 +38,11 @@
    	<div class="container">
 		<ui:repeat value="#{serverManager.submissions}" var="submission">
 	        <li class="media no_bullets">
-	            <a class="pull-left" href="#">
-	     		 <span class="glyphicon glyphicon-star"></span>
-	   		    </a>
+	            <div class="pull-left">
+	     			<a class="glyphicon glyphicon-arrow-up" href="http://upvote.com"></a>
+	     			<br>0#{submission.votes}</br> <!-- ugly fix with 0.. todo make better -->
+	     			<a class="glyphicon glyphicon-arrow-down" href="http://downvote.com"></a>
+	   		    </div>
 	   		    <div class="media-body">
 	            <h4 class="media-heading">
 	            <a href="#{submission.url}">#{submission.title}</a></h4>
