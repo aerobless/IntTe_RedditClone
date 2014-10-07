@@ -154,6 +154,7 @@ public class SubmissionBean implements Serializable {
 		//TODO: prevent votes from going over int limit, maybe even use double instead of int
 		//TODO: color arrow differently when a user has voted
 		setVotes(votes+1);
+		//manager.saveAll();
 	}
 	
 	public void downvote(AjaxBehaviorEvent event) {
@@ -161,6 +162,7 @@ public class SubmissionBean implements Serializable {
 		//TODO: prevent votes from going over int limit, maybe even use double instead of int
 		//TODO: color arrow differently when a user has voted
 		setVotes(votes-1);
+		//manager.saveAll();
 	}
 	
 	public void addNewSubmission(AjaxBehaviorEvent event){
