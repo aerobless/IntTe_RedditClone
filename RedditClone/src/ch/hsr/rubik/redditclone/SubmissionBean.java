@@ -163,16 +163,14 @@ public class SubmissionBean implements Serializable {
 		//TODO: color arrow differently when a user has voted
 		updateUserReference();		
 		if(user!= null && user.isLoggedIn() && !userUpvotes.contains(user.getUsername())){
-			userUpvotes.add(user.getUsername());
-			setVotes(votes+1);
 			//Remove user from Downvotes because he changed to upvote
 			if(userDownvotes.contains(user.getUsername())){
 				userDownvotes.remove(user.getUsername());
-				setVotes(votes+1);
 			} else {
-				//TODO: add warning that user tried to upvote more then once.
-				System.out.println("User tried to upvote more then once.");
+				userUpvotes.add(user.getUsername());
 			}
+			setVotes(votes+1);
+			//TODO: add warning that user tried to upvote more then once.
 		} else {
 			//TODO: show error message that user isn't logged in.
 			System.out.println("User tried to vote but isn't logged in");
@@ -188,16 +186,14 @@ public class SubmissionBean implements Serializable {
 		//TODO: color arrow differently when a user has voted
 		updateUserReference();	
 		if(user!= null && user.isLoggedIn() && !userDownvotes.contains(user.getUsername())){  	
-			userDownvotes.add(user.getUsername());
-			setVotes(votes-1);
 			//Remove user from Upvotes because he changed to downvote
 			if(userUpvotes.contains(user.getUsername())){
 				userUpvotes.remove(user.getUsername());
-				setVotes(votes-1);
 			} else {
-				//TODO: add warning that user tried to downvote more then once.
-				System.out.println("User tried to downvote more then once.");
+				userDownvotes.add(user.getUsername());
 			}
+			setVotes(votes-1);
+			//TODO: add warning that user tried to downvote more then once.
 		} else {
 			//TODO: show error message that user isn't logged in.
 			System.out.println("User tried to vote but isn't logged in");
