@@ -23,7 +23,6 @@ public class UserBean implements Serializable{
 	private boolean loginRequired;
 	private enum InfoState {WELCOME, REGISTER, SUBMITPOST};
 	private InfoState infoBoxCurrentState;
-
 	
 	@ManagedProperty(value="#{serverManager}")
 	private ServerManager manager;

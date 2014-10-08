@@ -22,7 +22,7 @@ import com.thoughtworks.xstream.io.xml.StaxDriver;
  * By setting eager=true we're making sure that this been gets initialized and user-data gets loaded
  * before the first users tries to visit our page. 
  */
-@ManagedBean(name="serverManager", eager=true)
+@ManagedBean(name="serverManager")
 @ApplicationScoped
 public class ServerManager {
 	private ArrayList<UserBean> users;
@@ -34,6 +34,7 @@ public class ServerManager {
 	public ServerManager() {
 		super();
 		System.out.println("Loading users from disk..");
+		System.out.println("Storage-Path: "+getJarDirectory(""));
 		//TODO: actual save-to-xml / load-from-xml methods and demo data.
 		
 		File persistanceFile = new File(USER_FILE);
