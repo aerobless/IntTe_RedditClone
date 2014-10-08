@@ -49,6 +49,21 @@ public class ServerManager {
 			users = (ArrayList<UserBean>) loadXMLFile(USER_FILE);
 			submissions = (ArrayList<SubmissionBean>) loadXMLFile(SUBMISSIONS_FILE);
 		}
+		
+		//Save stuff regularly
+		Thread scheduledSaveManager = new Thread(() -> {
+		    while(true){
+		    	try {
+					Thread.sleep(30000);
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+		    	System.out.println("scheduledSaveManager saving to disk...");
+		    	saveAll();
+		    }
+		});
+		scheduledSaveManager.start();
 	}
 
 	public void saveAll() {
@@ -73,13 +88,11 @@ public class ServerManager {
 	
 	public void addUser(UserBean user){
 		users.add(user);
-		saveAll();
 		System.out.println("Added a new user, we're now counting "+users.size()+" in our database.");
 	}
 	
 	public void addSubmission(SubmissionBean submission){
 		submissions.add(submission);
-		saveAll();
 		System.out.println("Added a new submission, we're now counting "+submissions.size()+" in our database.");
 	}
 	
