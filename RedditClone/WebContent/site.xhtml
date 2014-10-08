@@ -46,11 +46,11 @@
 	            <div class="pull-left">
 		            <h:form id="voteblock">
 		     			<h:commandLink class="glyphicon glyphicon-arrow-up">
-		     				<f:ajax listener="#{submission.upvote}" render="voteblock"/>
+		     				<f:ajax execute="@all" listener="#{submission.upvote}" render="voteblock"/>
 		     			</h:commandLink>
 		     			<br>#{submission.votes}</br>
 		     			<h:commandLink class="glyphicon glyphicon-arrow-down">
-		     				<f:ajax listener="#{submission.downvote}" render="voteblock"/>
+		     				<f:ajax execute="@all" listener="#{submission.downvote}" render="voteblock"/>
 		     			</h:commandLink>
 		     		</h:form>
 	   		    </div>

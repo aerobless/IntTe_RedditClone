@@ -33,44 +33,57 @@ public class ServerManager {
 	
 	private final String USER_FILE = getJarDirectory("reddit_clone_users.xml"); 
 	private final String SUBMISSIONS_FILE = getJarDirectory("reddit_clone_submissions.xml"); 
-
+	private final int AUTOMATIC_SAVE_TIME_SECONDS = 30;
+	
 	public ServerManager() {
 		super();
 		System.out.println("Loading users from disk..");
 		System.out.println("Storage-Path: "+getJarDirectory(""));
-		//TODO: actual save-to-xml / load-from-xml methods and demo data.
 		
 		File persistanceFile = new File(USER_FILE);
 		if(!persistanceFile.exists()){
 			System.out.println("No existing data found, creating users.xml and submissions.xml");
-			//File doesn't exist yet, loading demo data
 			users = new ArrayList<UserBean>();
 			submissions = new ArrayList<SubmissionBean>();
 			loadDemoData();
 			saveAll();
 		} else {
 			System.out.println("Existing data found, loading users.xml and submissions.xml");
+			
+			//TODO: make better
+			/*
+			Object loadingUsers = loadXMLFile(USER_FILE);
+			
+			if (loadingUsers instanceof ArrayList<?>) {
+				if(((ArrayList<?>) loadingUsers).get(0) instanceof UserBean){
+					users = (ArrayList<UserBean>) loadingUsers;
+				}
+			}*/
+			
 			users = (ArrayList<UserBean>) loadXMLFile(USER_FILE);
 			submissions = (ArrayList<SubmissionBean>) loadXMLFile(SUBMISSIONS_FILE);
 		}
-		
-		//Save stuff regularly
+
+		createScheduledSaveManagerThread();
+	}
+
+	private void createScheduledSaveManagerThread() {
 		Thread scheduledSaveManager = new Thread(() -> {
 		    while(true){
 		    	try {
-					Thread.sleep(30000);
+					Thread.sleep(AUTOMATIC_SAVE_TIME_SECONDS*1000);
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-		    	System.out.println("scheduledSaveManager saving to disk...");
+		    	System.out.println(new Date()+" ScheduledSaveManager saving to disk...");
 		    	saveAll();
 		    }
 		});
 		scheduledSaveManager.start();
 	}
 
-	public void saveAll() {
+	private void saveAll() {
 		saveToXMLFile(users, USER_FILE);
 		saveToXMLFile(submissions, SUBMISSIONS_FILE);
 	}
@@ -117,13 +130,13 @@ public class ServerManager {
 		    fos.write(bytes);
 
 		} catch(Exception e) {
-			System.out.println("error TODO");
+			System.out.println("Error while saving data to XML");
 		} finally {
 		    if(fos!=null) {
 		        try{ 
 		            fos.close();
 		        } catch (IOException e) {
-					System.out.println("error TODO");
+					System.out.println("Error while saving data to XML");
 		        }
 		    }
 		}
@@ -158,13 +171,13 @@ public class ServerManager {
 		try {
 			dataXML = new URL(jarLocation, filename);
 		} catch (MalformedURLException e) {
-			System.out.println("Malformed URL in LogicEngine. JarLoc: "+jarLocation+" Filename: "+filename);
+			System.out.println("Malformed URL in ServerManager. JarLoc: "+jarLocation+" Filename: "+filename);
 		}
 		String decodedPath = null;
 		try {
 			decodedPath = URLDecoder.decode(dataXML.getPath(), "UTF-8");
 		} catch (UnsupportedEncodingException e) {
-			System.out.println("UnsipportedEncodingException in LogicEngine. (UTF-8)");
+			System.out.println("UnsupportedEncodingException in ServerManager. (UTF-8)");
 		}
 		return decodedPath;
 	}

@@ -2,7 +2,6 @@ package ch.hsr.rubik.redditclone;
 import java.io.IOException;
 import java.io.Serializable;
 
-import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
@@ -67,6 +66,7 @@ public class UserBean implements Serializable{
 
 	public UserBean(String aName, String aPassword) {
 		super();
+		loginRequired = true;
 		username = aName;
 		password = aPassword;
 	}
@@ -79,7 +79,8 @@ public class UserBean implements Serializable{
 			setShowWelcome();
 		} else {
 			System.out.println("user not found");
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Username or password is incorrect"));
+			//TODO: Create proper Error message, probably best if floating or displayed in main jumbotron
+			//FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Username or password is incorrect"));
 		}
 	}
 	
@@ -157,11 +158,16 @@ public class UserBean implements Serializable{
 	}
 	
 	public String logout(){
-		((HttpSession) FacesContext.getCurrentInstance()
-				   .getExternalContext().getSession(false)).invalidate();
+		invalidateSession();
 		redirect("site.xhtml");
 		return "ok";
 	}
+	
+	private void invalidateSession() {
+		((HttpSession) FacesContext.getCurrentInstance()
+				   .getExternalContext().getSession(false)).invalidate();
+	}
+	
 	/**
 	 * @return the loggedIn
 	 */

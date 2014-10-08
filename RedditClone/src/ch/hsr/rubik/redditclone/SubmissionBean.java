@@ -7,6 +7,7 @@ import java.util.Date;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 import javax.faces.event.AjaxBehaviorEvent;
 
 @ManagedBean(name="submissionBean")
@@ -19,6 +20,8 @@ public class SubmissionBean implements Serializable {
 	private String submittedByUser;
 	private int votes;
 	
+	private ArrayList<String> userUpvotes;
+	private ArrayList<String> userDownvotes;
 	private ArrayList<CommentBean> comments;
 	
 	@ManagedProperty(value="#{serverManager}")
@@ -28,7 +31,10 @@ public class SubmissionBean implements Serializable {
 	private UserBean user;
 
 	public SubmissionBean() {
-		
+		votes = 1;
+		userUpvotes = new ArrayList<String>();
+		userDownvotes  = new ArrayList<String>();
+		comments = new ArrayList<CommentBean>();
 	}
 
 	public ServerManager getManager() {
@@ -63,6 +69,9 @@ public class SubmissionBean implements Serializable {
 		submissionDate = aSubmissionDate;
 		submittedByUser = aSubmittedByUser;
 		votes = 1;
+		userUpvotes = new ArrayList<String>();
+		userDownvotes  = new ArrayList<String>();
+		comments = new ArrayList<CommentBean>();
 	}
 
 	/**
@@ -150,19 +159,49 @@ public class SubmissionBean implements Serializable {
 	}
 	
 	public void upvote(AjaxBehaviorEvent event) {
-		//TODO: remember which user voted so that we can prevent ppl from voting multiple times
 		//TODO: prevent votes from going over int limit, maybe even use double instead of int
 		//TODO: color arrow differently when a user has voted
-		setVotes(votes+1);
-		//manager.saveAll();
+		updateUserReference();		
+		if(user!= null && user.isLoggedIn() && !userUpvotes.contains(user.getUsername())){
+			userUpvotes.add(user.getUsername());
+			setVotes(votes+1);
+			//Remove user from Downvotes because he changed to upvote
+			if(userDownvotes.contains(user.getUsername())){
+				userDownvotes.remove(user.getUsername());
+				setVotes(votes+1);
+			} else {
+				//TODO: add warning that user tried to upvote more then once.
+				System.out.println("User tried to upvote more then once.");
+			}
+		} else {
+			//TODO: show error message that user isn't logged in.
+			System.out.println("User tried to vote but isn't logged in");
+		}
+	}
+
+	private void updateUserReference() {
+		user = (UserBean) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("userBean");
 	}
 	
 	public void downvote(AjaxBehaviorEvent event) {
-		//TODO: remember which user voted so that we can prevent ppl from voting multiple times
 		//TODO: prevent votes from going over int limit, maybe even use double instead of int
 		//TODO: color arrow differently when a user has voted
-		setVotes(votes-1);
-		//manager.saveAll();
+		updateUserReference();	
+		if(user!= null && user.isLoggedIn() && !userDownvotes.contains(user.getUsername())){  	
+			userDownvotes.add(user.getUsername());
+			setVotes(votes-1);
+			//Remove user from Upvotes because he changed to downvote
+			if(userUpvotes.contains(user.getUsername())){
+				userUpvotes.remove(user.getUsername());
+				setVotes(votes-1);
+			} else {
+				//TODO: add warning that user tried to downvote more then once.
+				System.out.println("User tried to downvote more then once.");
+			}
+		} else {
+			//TODO: show error message that user isn't logged in.
+			System.out.println("User tried to vote but isn't logged in");
+		}
 	}
 	
 	public void addNewSubmission(AjaxBehaviorEvent event){
