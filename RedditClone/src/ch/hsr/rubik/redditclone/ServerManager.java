@@ -35,31 +35,28 @@ public class ServerManager {
 	private final String SUBMISSIONS_FILE = getJarDirectory("reddit_clone_submissions.xml"); 
 	private final int AUTOMATIC_SAVE_TIME_SECONDS = 30;
 	
+	//When true, the persistence-files users.xml & submissions.xml are recreated for every restart.
+	private boolean DEBUG_NO_SAVE = true;
+	
+	@SuppressWarnings("unchecked")
 	public ServerManager() {
 		super();
 		System.out.println("Loading users from disk..");
 		System.out.println("Storage-Path: "+getJarDirectory(""));
 		
 		File persistanceFile = new File(USER_FILE);
-		if(!persistanceFile.exists()){
-			System.out.println("No existing data found, creating users.xml and submissions.xml");
+		if(!persistanceFile.exists() || DEBUG_NO_SAVE){
+			if(DEBUG_NO_SAVE){
+				System.out.println("Debug: NO_SAVE flag enabled, re-creating user-data for every restart");
+			}else{
+				System.out.println("No existing data found, creating users.xml and submissions.xml");
+			}
 			users = new ArrayList<UserBean>();
 			submissions = new ArrayList<SubmissionBean>();
 			loadDemoData();
 			saveAll();
 		} else {
 			System.out.println("Existing data found, loading users.xml and submissions.xml");
-			
-			//TODO: make better
-			/*
-			Object loadingUsers = loadXMLFile(USER_FILE);
-			
-			if (loadingUsers instanceof ArrayList<?>) {
-				if(((ArrayList<?>) loadingUsers).get(0) instanceof UserBean){
-					users = (ArrayList<UserBean>) loadingUsers;
-				}
-			}*/
-			
 			users = (ArrayList<UserBean>) loadXMLFile(USER_FILE);
 			submissions = (ArrayList<SubmissionBean>) loadXMLFile(SUBMISSIONS_FILE);
 		}
