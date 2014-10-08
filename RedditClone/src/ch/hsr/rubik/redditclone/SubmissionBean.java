@@ -169,7 +169,7 @@ public class SubmissionBean implements Serializable {
 		System.out.println("submission added");
 		setSubmittedByUser(user.getUsername());
 		setSubmissionDate(new Date());
-		//manager.addSubmission(this);
+		manager.addSubmission(this);
 		user.setShowWelcome();
 		System.out.println("all done");
 	}

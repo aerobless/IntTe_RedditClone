@@ -21,6 +21,9 @@ import com.thoughtworks.xstream.io.xml.StaxDriver;
  * This bean is accessible throughout the entire application (see UserBean login method for an example).
  * By setting eager=true we're making sure that this been gets initialized and user-data gets loaded
  * before the first users tries to visit our page. 
+ * 
+ * Edit: Removed eager=true because it ended up starting this bean multiple times.. will have to see if
+ * there's another way to get this to start up early.
  */
 @ManagedBean(name="serverManager")
 @ApplicationScoped
