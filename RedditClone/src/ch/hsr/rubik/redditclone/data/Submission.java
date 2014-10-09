@@ -35,18 +35,27 @@ public class Submission implements Serializable {
         this(title, url, submittedByUser, new Date());
     }
 
+    /**
+     * Constructor for creating new submissions without any comments and
+     * up-/downvotes yet. The submission has one upvote from the submitter.
+     */
     public Submission(final String title, final String url,
             final String submittedByUser, final Date submissionDate) {
-        this(title, url, submittedByUser, submissionDate, 1, new ArrayList<>(),
-                new ArrayList<>(), new ArrayList<>());
-        List<String> userUpvoteList = new ArrayList<>();
-        userUpvoteList.add(submittedByUser);
+        //@formatter:off
+        /* I know this is really ugly but I don't want duplicated code or just a function for that
+         * {{}} is double brace initialization which creates an anonymous inner class with
+         * just an instance initializer in it and any method from ArrayList can be used.
+         */
+        this(title, url, submittedByUser, submissionDate,
+                new ArrayList<String>() {{add(submittedByUser);}}, 
+                new ArrayList<String>(), new ArrayList<CommentBean>());
+        //@formatter:on
     }
 
     public Submission(final String title, final String url,
             final String submittedByUser, final Date submissionDate,
-            final int votes, final List<String> userUpvotes,
-            final List<String> userDownvotes, final List<CommentBean> comments) {
+            final List<String> userUpvotes, final List<String> userDownvotes,
+            final List<CommentBean> comments) {
         super();
         this.title = title;
         this.url = url;
@@ -55,6 +64,8 @@ public class Submission implements Serializable {
         this.userUpvotes = userUpvotes;
         this.userDownvotes = userDownvotes;
         this.comments = comments;
+
+        recalculateVotes();
     }
 
     public void upvote(final AjaxBehaviorEvent event) {

@@ -51,10 +51,10 @@ public class ServerManager {
         if (!persistanceFile.exists() || DEBUG_NO_SAVE) {
             if (DEBUG_NO_SAVE) {
                 System.out
-                .println("Debug: NO_SAVE flag enabled, re-creating user-data for every restart");
+                        .println("Debug: NO_SAVE flag enabled, re-creating user-data for every restart");
             } else {
                 System.out
-                .println("No existing data found, creating users.xml and submissions.xml");
+                        .println("No existing data found, creating users.xml and submissions.xml");
             }
             users = new ArrayList<>();
             submissions = new ArrayList<>();
@@ -62,7 +62,7 @@ public class ServerManager {
             saveAll();
         } else {
             System.out
-            .println("Existing data found, loading users.xml and submissions.xml");
+                    .println("Existing data found, loading users.xml and submissions.xml");
             users = (ArrayList<UserBean>) loadXMLFile(USER_FILE);
             submissions = (ArrayList<Submission>) loadXMLFile(SUBMISSIONS_FILE);
         }
@@ -78,13 +78,13 @@ public class ServerManager {
                 }
                 catch (Exception e) {
                     // TODO Auto-generated catch block
-                    e.printStackTrace();
-                }
-                System.out.println(new Date()
-                + " ScheduledSaveManager saving to disk...");
-                saveAll();
+                e.printStackTrace();
             }
-        }   );
+            System.out.println(new Date()
+                    + " ScheduledSaveManager saving to disk...");
+            saveAll();
+        }
+    }   );
         scheduledSaveManager.start();
     }
 
@@ -98,16 +98,19 @@ public class ServerManager {
         users.add(new UserBean("marco", "123456"));
         users.add(new UserBean("daniela", "123456"));
 
-        submissions.add(new Submission("http://www.google.com",
-                "A cool new search engine", "theo"));
-        submissions.add(new Submission("http://www.apple.com",
-                "A company that sells awesome computers", "marco"));
-        submissions.add(new Submission("http://www.reddit.com",
-                "Like RedditClone but not as good looking..", "theo"));
+        submissions.add(new Submission("A cool new search engine",
+                "http://www.google.com", "theo"));
+        submissions.add(new Submission(
+                "A company that sells awesome computers",
+                "http://www.apple.com", "marco"));
+        submissions.add(new Submission(
+                "Like RedditClone but not as good looking..",
+                "http://www.reddit.com", "theo"));
         submissions
-        .add(new Submission(
-                "http://www.reddit.com/r/talesfromtechsupport/comments/2idaug/you_unplugged_your_what/",
-                "You unplugged your what?", "self.talesfromtechsupport"));
+                .add(new Submission(
+                        "You unplugged your what?",
+                        "http://www.reddit.com/r/talesfromtechsupport/comments/2idaug/you_unplugged_your_what/",
+                        "self.talesfromtechsupport"));
     }
 
     public boolean containsUser(final UserBean user) {
@@ -130,10 +133,12 @@ public class ServerManager {
         return submissions;
     }
 
-    /** Save something as xml file.
+    /**
+     * Save something as xml file.
      * 
      * @param inputObject
-     * @param filename */
+     * @param filename
+     */
     public void saveToXMLFile(final Object inputObject, final String filename) {
         FileOutputStream fos = null;
         try {
@@ -165,10 +170,12 @@ public class ServerManager {
         return saveXStream.toXML(input);
     }
 
-    /** Load something from a xml file.
+    /**
+     * Load something from a xml file.
      * 
      * @param filename
-     * @return */
+     * @return
+     */
     public Object loadXMLFile(final String filename) {
         File xmlFile = new File(filename);
         XStream loadXStream = new XStream(new StaxDriver());
@@ -196,7 +203,7 @@ public class ServerManager {
         }
         catch (UnsupportedEncodingException e) {
             System.out
-            .println("UnsupportedEncodingException in ServerManager. (UTF-8)");
+                    .println("UnsupportedEncodingException in ServerManager. (UTF-8)");
         }
         return decodedPath;
     }
