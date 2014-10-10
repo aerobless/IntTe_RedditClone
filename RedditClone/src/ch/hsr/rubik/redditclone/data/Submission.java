@@ -69,8 +69,6 @@ public class Submission implements Serializable {
     }
 
     public void upvote(final AjaxBehaviorEvent event) {
-        // TODO: prevent votes from going over int limit, maybe even use double
-        // instead of int
         // TODO: color arrow differently when a user has voted
 
         UserBean user = (UserBean) FacesContext.getCurrentInstance()
@@ -103,8 +101,6 @@ public class Submission implements Serializable {
     }
 
     public void downvote(final AjaxBehaviorEvent event) {
-        // TODO: color arrow differently when a user has voted
-
         UserBean user = (UserBean) FacesContext.getCurrentInstance()
                 .getExternalContext().getSessionMap().get("userBean");
         final String username = user.getUsername();
@@ -129,6 +125,11 @@ public class Submission implements Serializable {
             // TODO: show error message that user isn't logged in.
             System.out.println("User tried to vote but isn't logged in");
         }
+    }
+
+    public int getDownvote() {
+        System.out.println("uiarenuaidertuaiedtrnuertduaiertuaine");
+        return 0;
     }
 
     private static boolean userCanVote(final UserBean user) {
@@ -213,6 +214,14 @@ public class Submission implements Serializable {
 
     public final void decVotes() {
         --votes;
+    }
+
+    public boolean userHasUpvoted(final UserBean user) {
+        return !canUpvote(user);
+    }
+
+    public boolean userHasDownvoted(final UserBean user) {
+        return !canDownvote(user);
     }
 
     private boolean canDownvote(final UserBean user) {
