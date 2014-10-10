@@ -127,11 +127,6 @@ public class Submission implements Serializable {
         }
     }
 
-    public int getDownvote() {
-        System.out.println("uiarenuaidertuaiedtrnuertduaiertuaine");
-        return 0;
-    }
-
     private static boolean userCanVote(final UserBean user) {
         return user != null && user.isLoggedIn();
     }
