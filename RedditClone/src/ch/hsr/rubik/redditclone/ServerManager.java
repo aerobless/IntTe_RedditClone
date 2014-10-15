@@ -66,8 +66,9 @@ public class ServerManager {
             users = (ArrayList<UserBean>) loadXMLFile(USER_FILE);
             submissions = (ArrayList<Submission>) loadXMLFile(SUBMISSIONS_FILE);
         }
-
-        createScheduledSaveManagerThread();
+        if(DEBUG_NO_SAVE){
+            createScheduledSaveManagerThread();
+        }
     }
 
     private void createScheduledSaveManagerThread() {
