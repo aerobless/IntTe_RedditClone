@@ -2,6 +2,7 @@ package ch.hsr.rubik.redditclone;
 import java.io.IOException;
 import java.io.Serializable;
 
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
@@ -81,9 +82,11 @@ public class UserBean implements Serializable{
 			setShowWelcome();
 		} else {
 			System.out.println("user not found");
-			//TODO: Create proper Error message, probably best if floating or displayed in main jumbotron
-			//FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Username or password is incorrect"));
+			displayUserWarning("Username or Password is incorrect");
 		}
+	}
+	public void displayUserWarning(String errorMessage) {
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(errorMessage));
 	}
 	
     public void handleEvent(AjaxBehaviorEvent event) {
@@ -114,7 +117,11 @@ public class UserBean implements Serializable{
 	}
 	
 	private boolean verifyRegistrationInput() {
-		return password.equals(passwordConfirm) && email.contains("@");
+		if(!(password.equals(passwordConfirm) && email.contains("@"))){
+			displayUserWarning("Make sure that your email adress contains an @ and your passwords match.");
+			return false;
+		}
+		return true;
 	}
 	
 	private void redirect(String pagename){
