@@ -2,12 +2,15 @@ package ch.hsr.rubik.redditclone;
 import java.io.IOException;
 import java.io.Serializable;
 
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.AjaxBehaviorEvent;
 import javax.servlet.http.HttpSession;
+
+import ch.hsr.rubik.redditclone.data.User;
 
 @ManagedBean(name="userBean")
 @SessionScoped
@@ -73,15 +76,17 @@ public class UserBean implements Serializable{
 	
 	public void login(AjaxBehaviorEvent event) {
 		System.out.println(username+" "+password);
-		if(manager.containsUser(this)){
+		if(manager.containsUser(username, password)){
 			System.out.println("user found");
 			setLoginRequired(false);
 			setShowWelcome();
 		} else {
 			System.out.println("user not found");
-			//TODO: Create proper Error message, probably best if floating or displayed in main jumbotron
-			//FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Username or password is incorrect"));
+			displayUserWarning("Username or Password is incorrect");
 		}
+	}
+	public void displayUserWarning(String errorMessage) {
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(errorMessage));
 	}
 	
     public void handleEvent(AjaxBehaviorEvent event) {
@@ -104,7 +109,7 @@ public class UserBean implements Serializable{
 	public void addNewUser(AjaxBehaviorEvent event){
 		System.out.println("user added");
 		if(verifyRegistrationInput()){
-			manager.addUser(this);
+			manager.addUser(new User(username, password, email));
 			setShowWelcome();
 			setLoggedIn(true);
 			System.out.println("all done");
@@ -112,39 +117,10 @@ public class UserBean implements Serializable{
 	}
 	
 	private boolean verifyRegistrationInput() {
-		return password.equals(passwordConfirm) && email.contains("@");
-	}
-	
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result
-				+ ((password == null) ? 0 : password.hashCode());
-		result = prime * result
-				+ ((username == null) ? 0 : username.hashCode());
-		return result;
-	}
-	
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
+		if(!(password.equals(passwordConfirm) && email.contains("@"))){
+			displayUserWarning("Make sure that your email adress contains an @ and your passwords match.");
 			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		UserBean other = (UserBean) obj;
-		if (password == null) {
-			if (other.password != null)
-				return false;
-		} else if (!password.equals(other.password))
-			return false;
-		if (username == null) {
-			if (other.username != null)
-				return false;
-		} else if (!username.equals(other.username))
-			return false;
+		}
 		return true;
 	}
 	

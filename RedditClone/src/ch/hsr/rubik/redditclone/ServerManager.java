@@ -15,6 +15,7 @@ import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
 
 import ch.hsr.rubik.redditclone.data.Submission;
+import ch.hsr.rubik.redditclone.data.User;
 
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.StaxDriver;
@@ -30,7 +31,7 @@ import com.thoughtworks.xstream.io.xml.StaxDriver;
 @ManagedBean(name = "serverManager")
 @ApplicationScoped
 public class ServerManager {
-    private ArrayList<UserBean> users;
+    private ArrayList<User> users;
     private ArrayList<Submission> submissions;
 
     private final String USER_FILE = getJarDirectory("reddit_clone_users.xml");
@@ -48,25 +49,17 @@ public class ServerManager {
         System.out.println("Storage-Path: " + getJarDirectory(""));
 
         File persistanceFile = new File(USER_FILE);
-        if (!persistanceFile.exists() || DEBUG_NO_SAVE) {
-            if (DEBUG_NO_SAVE) {
-                System.out
-                        .println("Debug: NO_SAVE flag enabled, re-creating user-data for every restart");
-            } else {
-                System.out
-                        .println("No existing data found, creating users.xml and submissions.xml");
-            }
-            users = new ArrayList<>();
-            submissions = new ArrayList<>();
+        if (DEBUG_NO_SAVE) {
+            System.out.println("Debug: NO_SAVE flag enabled, re-creating user-data for every restart");
             loadDemoData();
-            saveAll();
+        } else if(!persistanceFile.exists()){
+            System.out.println("No existing data found, creating users.xml and submissions.xml");
+            loadDemoData();
+            createScheduledSaveManagerThread();
         } else {
-            System.out
-                    .println("Existing data found, loading users.xml and submissions.xml");
-            users = (ArrayList<UserBean>) loadXMLFile(USER_FILE);
+            System.out.println("Existing data found, loading users.xml and submissions.xml");
+            users = (ArrayList<User>) loadXMLFile(USER_FILE);
             submissions = (ArrayList<Submission>) loadXMLFile(SUBMISSIONS_FILE);
-        }
-        if(DEBUG_NO_SAVE){
             createScheduledSaveManagerThread();
         }
     }
@@ -78,9 +71,8 @@ public class ServerManager {
                     Thread.sleep(AUTOMATIC_SAVE_TIME_SECONDS * 1000);
                 }
                 catch (Exception e) {
-                    // TODO Auto-generated catch block
-                e.printStackTrace();
-            }
+                	e.printStackTrace();
+                }
             System.out.println(new Date()
                     + " ScheduledSaveManager saving to disk...");
             saveAll();
@@ -95,9 +87,12 @@ public class ServerManager {
     }
 
     private void loadDemoData() {
-        users.add(new UserBean("theo", "123456"));
-        users.add(new UserBean("marco", "123456"));
-        users.add(new UserBean("daniela", "123456"));
+        users = new ArrayList<>();
+        submissions = new ArrayList<>();
+        
+    	users.add(new User("theo", "123456", "theo@redditclone.com"));
+        users.add(new User("marco", "123456", "marco@redditclone.com"));
+        users.add(new User("daniela", "123456", "daniela@redditclone.com"));
 
         submissions.add(new Submission("A cool new search engine",
                 "http://www.google.com", "theo"));
@@ -114,11 +109,11 @@ public class ServerManager {
                         "self.talesfromtechsupport"));
     }
 
-    public boolean containsUser(final UserBean user) {
-        return users.contains(user);
+    public boolean containsUser(String username, String password) {
+        return users.contains(new User(username, password, null));
     }
 
-    public void addUser(final UserBean user) {
+    public void addUser(final User user) {
         users.add(user);
         System.out.println("Added a new user, we're now counting "
                 + users.size() + " in our database.");
@@ -203,8 +198,7 @@ public class ServerManager {
             decodedPath = URLDecoder.decode(dataXML.getPath(), "UTF-8");
         }
         catch (UnsupportedEncodingException e) {
-            System.out
-                    .println("UnsupportedEncodingException in ServerManager. (UTF-8)");
+            System.out.println("UnsupportedEncodingException in ServerManager. (UTF-8)");
         }
         return decodedPath;
     }
