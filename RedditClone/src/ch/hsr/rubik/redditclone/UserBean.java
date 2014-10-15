@@ -9,6 +9,8 @@ import javax.faces.context.FacesContext;
 import javax.faces.event.AjaxBehaviorEvent;
 import javax.servlet.http.HttpSession;
 
+import ch.hsr.rubik.redditclone.data.User;
+
 @ManagedBean(name="userBean")
 @SessionScoped
 public class UserBean implements Serializable{
@@ -17,6 +19,8 @@ public class UserBean implements Serializable{
 	private String email;
 	private String password; //req. for equal
 	private String passwordConfirm;
+	
+	private User user;
 	
 	//Switches
 	private boolean loginRequired;
@@ -73,7 +77,7 @@ public class UserBean implements Serializable{
 	
 	public void login(AjaxBehaviorEvent event) {
 		System.out.println(username+" "+password);
-		if(manager.containsUser(this)){
+		if(manager.containsUser(username, password)){
 			System.out.println("user found");
 			setLoginRequired(false);
 			setShowWelcome();
@@ -104,7 +108,7 @@ public class UserBean implements Serializable{
 	public void addNewUser(AjaxBehaviorEvent event){
 		System.out.println("user added");
 		if(verifyRegistrationInput()){
-			manager.addUser(this);
+			manager.addUser(new User(username, password, email));
 			setShowWelcome();
 			setLoggedIn(true);
 			System.out.println("all done");
