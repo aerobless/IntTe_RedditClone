@@ -49,25 +49,17 @@ public class ServerManager {
         System.out.println("Storage-Path: " + getJarDirectory(""));
 
         File persistanceFile = new File(USER_FILE);
-        if (!persistanceFile.exists() || DEBUG_NO_SAVE) {
-            if (DEBUG_NO_SAVE) {
-                System.out
-                        .println("Debug: NO_SAVE flag enabled, re-creating user-data for every restart");
-            } else {
-                System.out
-                        .println("No existing data found, creating users.xml and submissions.xml");
-            }
-            users = new ArrayList<>();
-            submissions = new ArrayList<>();
+        if (DEBUG_NO_SAVE) {
+            System.out.println("Debug: NO_SAVE flag enabled, re-creating user-data for every restart");
             loadDemoData();
-            saveAll();
+        } else if(!persistanceFile.exists()){
+            System.out.println("No existing data found, creating users.xml and submissions.xml");
+            loadDemoData();
+            createScheduledSaveManagerThread();
         } else {
-            System.out
-                    .println("Existing data found, loading users.xml and submissions.xml");
+            System.out.println("Existing data found, loading users.xml and submissions.xml");
             users = (ArrayList<User>) loadXMLFile(USER_FILE);
             submissions = (ArrayList<Submission>) loadXMLFile(SUBMISSIONS_FILE);
-        }
-        if(DEBUG_NO_SAVE){
             createScheduledSaveManagerThread();
         }
     }
@@ -79,9 +71,8 @@ public class ServerManager {
                     Thread.sleep(AUTOMATIC_SAVE_TIME_SECONDS * 1000);
                 }
                 catch (Exception e) {
-                    // TODO Auto-generated catch block
-                e.printStackTrace();
-            }
+                	e.printStackTrace();
+                }
             System.out.println(new Date()
                     + " ScheduledSaveManager saving to disk...");
             saveAll();
@@ -96,7 +87,10 @@ public class ServerManager {
     }
 
     private void loadDemoData() {
-        users.add(new User("theo", "123456", "theo@redditclone.com"));
+        users = new ArrayList<>();
+        submissions = new ArrayList<>();
+        
+    	users.add(new User("theo", "123456", "theo@redditclone.com"));
         users.add(new User("marco", "123456", "marco@redditclone.com"));
         users.add(new User("daniela", "123456", "daniela@redditclone.com"));
 
@@ -204,8 +198,7 @@ public class ServerManager {
             decodedPath = URLDecoder.decode(dataXML.getPath(), "UTF-8");
         }
         catch (UnsupportedEncodingException e) {
-            System.out
-                    .println("UnsupportedEncodingException in ServerManager. (UTF-8)");
+            System.out.println("UnsupportedEncodingException in ServerManager. (UTF-8)");
         }
         return decodedPath;
     }
