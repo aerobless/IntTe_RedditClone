@@ -3,7 +3,8 @@
 	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:ui="http://java.sun.com/jsf/facelets">
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
 
 	<!--
 		 Site.xhtml is the main entry point. Only fully qualified, independently accessible
@@ -14,53 +15,80 @@
 
 	<ui:define name="title">IntTe Reddit Clone</ui:define>
 
-    <ui:define name="content">
-		 <!-- Main jumbotron for a primary marketing message or call to action -->
-	    <div class="jumbotron color_grey" id="jumbotron">
-	    	<h:panelGroup rendered="#{userBean.showWelcome}" id="welcomeContainer">
-	      		<div class="container">
-	        		<h1>Hello, world!</h1>
-	        		<p>This is some random text that will be removed sometime in the future.. or not. Maybe it will stay for
-	        			all eternity. Reddit is cool. This site is cool. I'm running out of things to write.. are you
-	        			seriously still reading this? It would be better if you were coding instead..</p>
-	        		<p><a class="btn btn-primary btn-lg" role="button" href="https://github.com/aerobless/IntTe_RedditClone">Learn more</a></p>
-	      		</div>
-	      	</h:panelGroup>
-	      	<h:panelGroup rendered="#{userBean.showRegister}" id="registerContainer">
-	     		<div class="container">
-	      			<ui:include src="/WEB-INF/login_components/register.xhtml"/>
-	      		</div>
-	    	</h:panelGroup>
-	    	<h:panelGroup rendered="#{userBean.showSubmitForm}" id="submitPostContainer">
-	     		<div class="container">
-	      			<ui:include src="/WEB-INF/submission_components/submitSubmission.xhtml"/>
-	      		</div>
-	    	</h:panelGroup>
-	    </div>
-    </ui:define>
-    
-   	<ui:define name="posts">
-   	<div class="container">
-		<ui:repeat value="#{serverManager.submissions}" var="submission">
-	        <li class="media no_bullets">
-	            <div class="pull-left">
-		            <h:form id="voteblock">
-		     			<h:commandLink class="glyphicon glyphicon-arrow-up">
-		     				<f:ajax execute="@all" listener="#{submission.upvote}" render="voteblock"/>
-		     			</h:commandLink>
-		     			<br></br>#{submission.votes}<br></br>
-		     			<h:commandLink class="glyphicon glyphicon-arrow-down">
-		     				<f:ajax execute="@all" listener="#{submission.downvote}" render="voteblock"/>
-		     			</h:commandLink>
-		     		</h:form>
-	   		    </div>
-	   		    <div class="media-body">
-	            <h4 class="media-heading">
-	            <a href="#{submission.url}">#{submission.title}</a></h4>
-	            submitted #{submission.submissionDate} by #{submission.submittedByUser}
-	           </div>
-	        </li>
-	    </ui:repeat>
-     </div>
-    </ui:define>
+	<ui:define name="content">
+		<!-- Main jumbotron for a primary marketing message or call to action -->
+		<div class="jumbotron color_grey" id="jumbotron">
+			<h:panelGroup rendered="#{userBean.showWelcome}"
+				id="welcomeContainer">
+				<div class="container">
+					<h1>Hello, world!</h1>
+					<p>This is some random text that will be removed sometime in
+						the future.. or not. Maybe it will stay for all eternity. Reddit
+						is cool. This site is cool. I'm running out of things to write..
+						are you seriously still reading this? It would be better if you
+						were coding instead..</p>
+					<p>
+						<a class="btn btn-primary btn-lg" role="button"
+							href="https://github.com/aerobless/IntTe_RedditClone">Learn
+							more</a>
+					</p>
+				</div>
+			</h:panelGroup>
+			<h:panelGroup rendered="#{userBean.showRegister}"
+				id="registerContainer">
+				<div class="container">
+					<ui:include src="/WEB-INF/login_components/register.xhtml" />
+				</div>
+			</h:panelGroup>
+			<h:panelGroup rendered="#{userBean.showSubmitForm}"
+				id="submitPostContainer">
+				<div class="container">
+					<ui:include
+						src="/WEB-INF/submission_components/submitSubmission.xhtml" />
+				</div>
+			</h:panelGroup>
+		</div>
+	</ui:define>
+
+	<ui:define name="posts">
+		<div class="container">
+			<ui:repeat value="#{serverManager.submissions}" var="submission">
+				<li class="media no_bullets">
+					<div class="pull-left">
+						<h:form id="voteblock">
+
+							<!-- show upvote arrow in orange if user has already upvoted, otherwise grey -->
+							<h:commandLink
+								styleClass="glyphicon glyphicon-arrow-up #{submission.userHasUpvoted(userBean) ? 'upvoted' : 'no_vote'}">
+								<f:ajax execute="@all" listener="#{submission.upvote}"
+									render="voteblock" />
+							</h:commandLink>
+
+							<!-- Show the text in the same color as the up-/downvote arrow. Orange if upvoted, light blue if downvoted and grey if not voted yet -->
+							<br></br>
+							<h:outputText
+								styleClass="strong #{submission.userHasUpvoted(userBean) ? 'upvoted' : (submission.userHasDownvoted(userBean) ? 'downvoted' : 'no_vote')}"
+								value="#{submission.votes}"></h:outputText>
+							<br></br>
+
+							<!-- show downvote arrow in light blue if user has already downvoted, otherwise grey -->
+							<h:commandLink
+								styleClass="glyphicon glyphicon-arrow-down #{submission.userHasDownvoted(userBean) ? 'downvoted' : 'no_vote'}">
+								<f:ajax execute="@all" listener="#{submission.downvote}"
+									render="voteblock" />
+							</h:commandLink>
+
+						</h:form>
+					</div>
+					<div class="media-body">
+						<h4 class="media-heading">
+							<a href="#{submission.url}">#{submission.title}</a>
+						</h4>
+						submitted #{submission.submissionDate} by
+						#{submission.submittedByUser}
+					</div>
+				</li>
+			</ui:repeat>
+		</div>
+	</ui:define>
 </ui:composition>

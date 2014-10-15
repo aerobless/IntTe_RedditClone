@@ -12,4 +12,16 @@ body {
     list-style-type: none;
 }
 
+.no_vote{
+	color: #b7b7b7
+}
+
+.upvoted{
+	color: #ff8e63;
+}
+
+.downvoted{
+    color: #9494ff;
+}
+
 background-image: url("#{resource['img/glyphicons-halflings.png']}");
