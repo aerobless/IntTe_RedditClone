@@ -8,7 +8,6 @@ import java.util.List;
 import javax.faces.context.FacesContext;
 import javax.faces.event.AjaxBehaviorEvent;
 
-import ch.hsr.rubik.redditclone.CommentBean;
 import ch.hsr.rubik.redditclone.UserBean;
 
 public class Submission implements Serializable {
@@ -20,10 +19,12 @@ public class Submission implements Serializable {
     private Date submissionDate;
     private String submittedByUser;
     private int votes;
+    private int numberOfComments;
+    private boolean expandComments = false;
 
-    private List<String> userUpvotes;
+	private List<String> userUpvotes;
     private List<String> userDownvotes;
-    private List<CommentBean> comments;
+    private List<Comment> comments;
 
     /**
      * Constructor for creating new submissions without any comments and
@@ -48,14 +49,14 @@ public class Submission implements Serializable {
          */
         this(title, url, submittedByUser, submissionDate,
                 new ArrayList<String>() {{add(submittedByUser);}}, 
-                new ArrayList<String>(), new ArrayList<CommentBean>());
+                new ArrayList<String>(), new ArrayList<Comment>());
         //@formatter:on
     }
 
     public Submission(final String title, final String url,
             final String submittedByUser, final Date submissionDate,
             final List<String> userUpvotes, final List<String> userDownvotes,
-            final List<CommentBean> comments) {
+            final List<Comment> comments) {
         super();
         this.title = title;
         this.url = url;
@@ -64,6 +65,7 @@ public class Submission implements Serializable {
         this.userUpvotes = userUpvotes;
         this.userDownvotes = userDownvotes;
         this.comments = comments;
+        this.numberOfComments = comments.size();
 
         recalculateVotes();
     }
@@ -179,13 +181,14 @@ public class Submission implements Serializable {
         this.userDownvotes = userDownvotes;
     }
 
-    public List<CommentBean> getComments() {
+    public List<Comment> getComments() {
         return comments;
     }
 
-    public void setComments(final List<CommentBean> comments) {
+    public void setComments(final List<Comment> comments) {
         this.comments = comments;
     }
+    
 
     public Date getSubmissionDate() {
         return submissionDate;
@@ -226,5 +229,21 @@ public class Submission implements Serializable {
     private boolean canUpvote(final UserBean user) {
         return !userUpvotes.contains(user.getUsername());
     }
+    
+    public int getNumberOfComments(){
+    	return numberOfComments;
+    }
+   
+    public void setNumberOfcomments(){
+    	numberOfComments = comments.size();
+    }
+    
+    public boolean isExpandComments() {
+		return expandComments;
+	}
+
+	public void setExpandComments(boolean expandComments) {
+		this.expandComments = expandComments;
+	}
 
 }

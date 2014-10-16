@@ -87,6 +87,30 @@
 						submitted #{submission.submissionDate} by
 						#{submission.submittedByUser}
 					</div>
+					<!-- Link to expand all comments and the Post Comment Form -->
+					<h:form>
+						<h:commandLink value = "#{submission.numberOfComments} Comments">
+							<f:ajax execute="@all" listener="#{submissionBean.showCommentsOfSubmission(submission)}" render="@all"></f:ajax>
+						</h:commandLink>
+					</h:form>
+					<!-- Post Comment Form -->
+					  <h:panelGroup rendered="#{submission.expandComments}"
+									id="submitCommentContainer">
+						<div class="container">
+							<ui:include src="/WEB-INF/submission_components/commentSubmission.xhtml" />
+						</div>
+					</h:panelGroup>
+					<!-- all Comments -->
+					<ui:repeat var="comment" value="#{submission.comments}" rendered="#{submission.expandComments}">
+						<li class="media no_bullets">
+							<div class="media-body col-sm-offset-1 col-sm-10">
+								#{comment.commentContent} <br/>
+								submitted #{comment.commentDate} by
+								#{comment.commentedByUser}
+							</div>
+						</li>
+					</ui:repeat>
+					
 				</li>
 			</ui:repeat>
 		</div>
