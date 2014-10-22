@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
@@ -98,19 +99,35 @@ public class SubmissionBean implements Serializable {
     }
 
     public void addNewSubmission(final AjaxBehaviorEvent event) {
-        System.out.println("about to add submission");
-
         updateUserReference();
-        submission = new Submission(url, title, user.getUsername());
-        
-        manager.addSubmission(submission);
-        
-        setUrl(null);
-        setTitle(null);
-
-        user.setShowWelcome();
-        System.out.println("all done");
+        if(verifySubmission()){
+        	String goodURL = url;
+        	if(!(url.contains("http://")||url.contains("https://"))){
+        		goodURL = "http://"+url;
+        	}
+            submission = new Submission(title, goodURL, user.getUsername());
+            manager.addSubmission(submission);
+            setUrl(null);
+            setTitle(null);
+            user.setShowWelcome();
+        }
     }
+    
+    public boolean verifySubmission(){
+        if(url.length()<3){
+        	displayUserWarning("Invalid URL");
+        	return false;
+        }else if(title.length()==0){
+        	displayUserWarning("Please add a title");
+        	return false;
+        }
+    	return true;
+    }
+    
+	public void displayUserWarning(String errorMessage) {
+		System.out.println("user warnung");
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(errorMessage));
+	}
     
     public boolean showCommentsOfSubmission(Submission aSubmission){
     	submission = aSubmission;
