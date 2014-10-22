@@ -7,7 +7,9 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.context.FacesContext;
 import javax.faces.event.AjaxBehaviorEvent;
 
@@ -29,7 +31,7 @@ public class Submission implements Serializable, Comparable<Submission> {
 	private List<String> userUpvotes;
     private List<String> userDownvotes;
     private List<Comment> comments;
-
+    
     /**
      * Constructor for creating new submissions without any comments and
      * up-/downvotes yet. Submissiondate will be {@code new Date()} and the
@@ -258,5 +260,4 @@ public class Submission implements Serializable, Comparable<Submission> {
 	public void sortComments(){
 		Collections.sort(comments);
 	}
-
 }

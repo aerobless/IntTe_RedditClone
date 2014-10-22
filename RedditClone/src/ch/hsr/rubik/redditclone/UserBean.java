@@ -87,6 +87,7 @@ public class UserBean implements Serializable{
 		}
 	}
 	public void displayUserWarning(String errorMessage) {
+		System.out.println("user warnung");
 		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(errorMessage));
 	}
 	

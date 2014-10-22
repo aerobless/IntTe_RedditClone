@@ -56,13 +56,14 @@
 				<li class="media no_bullets">
 					<div class="pull-left">
 						<h:form id="voteblock">
-
-							<!-- show upvote arrow in orange if user has already upvoted, otherwise grey -->
-							<h:commandLink
-								styleClass="glyphicon glyphicon-arrow-up #{submission.userHasUpvoted(userBean) ? 'upvoted' : 'no_vote'}">
-								<f:ajax execute="@all" listener="#{submission.upvote}"
-									render="voteblock" />
-							</h:commandLink>
+							<h:panelGroup rendered="#{userBean.isLoggedIn()}">
+								<!-- show upvote arrow in orange if user has already upvoted, otherwise grey -->
+								<h:commandLink
+									styleClass="glyphicon glyphicon-arrow-up #{submission.userHasUpvoted(userBean) ? 'upvoted' : 'no_vote'}">
+									<f:ajax execute="@all" listener="#{submission.upvote}"
+										render="voteblock" />
+								</h:commandLink>
+							</h:panelGroup>
 
 							<!-- Show the text in the same color as the up-/downvote arrow. Orange if upvoted, light blue if downvoted and grey if not voted yet -->
 							<br></br>
@@ -70,13 +71,15 @@
 								styleClass="strong #{submission.userHasUpvoted(userBean) ? 'upvoted' : (submission.userHasDownvoted(userBean) ? 'downvoted' : 'no_vote')}"
 								value="#{submission.votes}"></h:outputText>
 							<br></br>
-
-							<!-- show downvote arrow in light blue if user has already downvoted, otherwise grey -->
-							<h:commandLink
-								styleClass="glyphicon glyphicon-arrow-down #{submission.userHasDownvoted(userBean) ? 'downvoted' : 'no_vote'}">
-								<f:ajax execute="@all" listener="#{submission.downvote}"
-									render="voteblock" />
-							</h:commandLink>
+							
+							<h:panelGroup rendered="#{userBean.isLoggedIn()}">
+								<!-- show downvote arrow in light blue if user has already downvoted, otherwise grey -->
+								<h:commandLink
+									styleClass="glyphicon glyphicon-arrow-down #{submission.userHasDownvoted(userBean) ? 'downvoted' : 'no_vote'}">
+									<f:ajax execute="@all" listener="#{submission.downvote}"
+										render="voteblock" />
+								</h:commandLink>
+							</h:panelGroup>
 
 						</h:form>
 					</div>
@@ -86,13 +89,14 @@
 						</h4>
 						submitted #{submission.submissionDate} by
 						#{submission.submittedByUser}
+						
+						<!-- Link to expand all comments and the Post Comment Form -->
+						<h:form>
+							<h:commandLink value = "#{submission.getNumberOfComments()} Comments">
+								<f:ajax execute="@all" listener="#{submissionBean.showCommentsOfSubmission(submission)}" render="@all"></f:ajax>
+							</h:commandLink>
+						</h:form>
 					</div>
-					<!-- Link to expand all comments and the Post Comment Form -->
-					<h:form>
-						<h:commandLink value = "#{submission.getNumberOfComments()} Comments">
-							<f:ajax execute="@all" listener="#{submissionBean.showCommentsOfSubmission(submission)}" render="@all"></f:ajax>
-						</h:commandLink>
-					</h:form>
 					<!-- Post Comment Form -->
 					<h:panelGroup rendered="#{userBean.isLoggedIn()}">
 						  <h:panelGroup rendered="#{submission.expandComments}"
@@ -108,12 +112,14 @@
 							<div class="media-body col-sm-offset-1 col-sm-10">
 							<div class="pull-left">
 								<h:form id="voteblock-comment">
-									<!-- show upvote arrow in orange if user has already upvoted, otherwise grey -->
-									<h:commandLink
-										styleClass="glyphicon glyphicon-arrow-up #{comment.userHasUpvoted(userBean) ? 'upvoted' : 'no_vote'}">
-										<f:ajax execute="@all" listener="#{comment.upvote}"
-											render="voteblock-comment" />
-									</h:commandLink>
+									<h:panelGroup rendered="#{userBean.isLoggedIn()}">
+										<!-- show upvote arrow in orange if user has already upvoted, otherwise grey -->
+										<h:commandLink
+											styleClass="glyphicon glyphicon-arrow-up #{comment.userHasUpvoted(userBean) ? 'upvoted' : 'no_vote'}">
+											<f:ajax execute="@all" listener="#{comment.upvote}"
+												render="voteblock-comment" />
+										</h:commandLink>
+									</h:panelGroup>
 		
 									<!-- Show the text in the same color as the up-/downvote arrow. Orange if upvoted, light blue if downvoted and grey if not voted yet -->
 									<br></br>
@@ -122,12 +128,14 @@
 										value="#{comment.votes}"></h:outputText>
 									<br></br>
 		
-									<!-- show downvote arrow in light blue if user has already downvoted, otherwise grey -->
-									<h:commandLink
-										styleClass="glyphicon glyphicon-arrow-down #{comment.userHasDownvoted(userBean) ? 'downvoted' : 'no_vote'}">
-										<f:ajax execute="@all" listener="#{comment.downvote}"
-											render="voteblock-comment" />
-									</h:commandLink>
+									<h:panelGroup rendered="#{userBean.isLoggedIn()}">
+										<!-- show downvote arrow in light blue if user has already downvoted, otherwise grey -->
+										<h:commandLink
+											styleClass="glyphicon glyphicon-arrow-down #{comment.userHasDownvoted(userBean) ? 'downvoted' : 'no_vote'}">
+											<f:ajax execute="@all" listener="#{comment.downvote}"
+												render="voteblock-comment" />
+										</h:commandLink>
+									</h:panelGroup>
 								</h:form>
 							</div>
 								#{comment.commentContent} <br/>
