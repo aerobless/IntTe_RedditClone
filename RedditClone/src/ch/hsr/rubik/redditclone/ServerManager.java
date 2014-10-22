@@ -14,6 +14,7 @@ import java.util.List;
 import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
 
+import ch.hsr.rubik.redditclone.data.Comment;
 import ch.hsr.rubik.redditclone.data.Submission;
 import ch.hsr.rubik.redditclone.data.User;
 
@@ -102,11 +103,15 @@ public class ServerManager {
         submissions.add(new Submission(
                 "Like RedditClone but not as good looking..",
                 "http://www.reddit.com", "theo"));
-        submissions
-                .add(new Submission(
-                        "You unplugged your what?",
-                        "http://www.reddit.com/r/talesfromtechsupport/comments/2idaug/you_unplugged_your_what/",
-                        "self.talesfromtechsupport"));
+        
+        Submission test = new Submission(
+                "You unplugged your what?",
+                "http://www.reddit.com/r/talesfromtechsupport/comments/2idaug/you_unplugged_your_what/",
+                "self.talesfromtechsupport");
+        ArrayList<Comment> testComments = new ArrayList<Comment>();
+        testComments.add(new Comment("test","test"));
+        test.setComments(testComments);
+        submissions.add(test);
     }
 
     public boolean containsUser(String username, String password) {
