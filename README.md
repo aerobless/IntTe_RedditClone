@@ -16,6 +16,7 @@ RedditClone is a project for the class InternetTechnology at [HSR](http://www.hs
  + RedditClone utilises Ajax wherever possible to reduce user-wait-time to a minimum. (Examples of Ajax are: Up/Downvotes, the submission panel & the login-action)
 
 ##Time Tracking
+This is a rudimentary time tracking. Please see the commit-history for more details.
 |Date | Time spent | Name | Task |
 |-----|------------|------|------|
 |01.10.2014 | 2h  | Daniela, Marco, Theo  | Project Setup, Git Repo, Discussion: Course of action  |
@@ -23,8 +24,12 @@ RedditClone is a project for the class InternetTechnology at [HSR](http://www.hs
 |02.10.2014 | 2h  | Theo  | Added bootstrap, basic design |
 |03.10.2014 | 6h  | Theo  | Changed login to use Ajax, added page body, added SubmissionBean, changed site layout to use template |
 |07.10.2014 | 5h  | Theo  | Improved bootstrap design, iterating through posts as a list, server is capable to store submissions/user as xml file, added upvote/downvote arrows |
-|08.10.2014 | 3h  | Theo  | Upvotes/Downvotes work, storing server data in separate Thread |
-| todo  | todo  | todo   | todo  |
-|   |   |   |   |
-|   |   |   |   |
-|   |   |   |   |
+|08.10.2014 | 3h  | Theo  | Upvotes/Downvotes initial logic, storing server data in separate Thread |
+|08.10.2014 | 4h  | Marco | Correct Upvote/Downvote behaviour, added data object for submissions |
+|09.10.2014 | 3h  | Marco | Improved submission data object, data object is now used instead of bean in ServerManager |
+|10.10.2014 | 3h  | Marco | Upvotes/Downvotes are coloured differently when a user voted |
+|15.10.2014 | 2h  | Theo  | Added user data object to store user data instead of userBean, added error messages (e.g. when entering the wrong password) |
+|15.10.2014 | 2h  | Marco | Added internationalisation (translations) |
+|16.10.2014 | 10h | Daniela | Added commentBean, comments per submission etc. |
+| ...  | ...  | ...   | ...  |
+|   |   |    |   |
