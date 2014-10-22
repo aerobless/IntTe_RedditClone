@@ -89,16 +89,18 @@
 					</div>
 					<!-- Link to expand all comments and the Post Comment Form -->
 					<h:form>
-						<h:commandLink value = "#{submission.numberOfComments} Comments">
+						<h:commandLink value = "#{submission.getNumberOfComments()} Comments">
 							<f:ajax execute="@all" listener="#{submissionBean.showCommentsOfSubmission(submission)}" render="@all"></f:ajax>
 						</h:commandLink>
 					</h:form>
 					<!-- Post Comment Form -->
-					  <h:panelGroup rendered="#{submission.expandComments}"
-									id="submitCommentContainer">
-						<div class="container">
-							<ui:include src="/WEB-INF/submission_components/commentSubmission.xhtml" />
-						</div>
+					<h:panelGroup rendered="#{userBean.isLoggedIn()}">
+						  <h:panelGroup rendered="#{submission.expandComments}"
+										id="submitCommentContainer">
+							<div class="container">
+								<ui:include src="/WEB-INF/submission_components/commentSubmission.xhtml" />
+							</div>
+					</h:panelGroup>
 					</h:panelGroup>
 					<!-- all Comments -->
 					<ui:repeat var="comment" value="#{submission.comments}" rendered="#{submission.expandComments}">

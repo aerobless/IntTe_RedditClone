@@ -21,11 +21,6 @@
 					<h:commandButton value="Submit Comment" styleClass='btn btn-primary'>
 						<f:ajax execute="@all" listener="#{commentBean.addNewCommentToSubmission}" render="@all"/>
 					</h:commandButton>
-					&#160; <!-- ugly fix for now -->
-					<!-- if I remove this Button an exception occurs (showWelcomePanel not found)  ???-->   
-					<h:commandButton value="Cancel" styleClass='btn btn-default'>
-						<f:ajax execute="@all" listener="#{userBean.showWelcomePanel}" render="@all"/>
-					</h:commandButton>
 		      </div>
 		 </div>
 	</h:form>

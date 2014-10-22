@@ -70,7 +70,7 @@ public class CommentBean {
 		
 		Comment aComment = new Comment(commentContent, user.getUsername());
 		submission.getComments().add(aComment);
-		
+		setCommentContent("");
         System.out.println("all done with this comment");
 	}
 	

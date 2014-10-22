@@ -231,7 +231,7 @@ public class Submission implements Serializable {
     }
     
     public int getNumberOfComments(){
-    	return numberOfComments;
+    	return comments.size();
     }
    
     public void setNumberOfcomments(){
