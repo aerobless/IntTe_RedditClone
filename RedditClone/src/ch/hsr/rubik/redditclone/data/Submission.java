@@ -2,15 +2,19 @@ package ch.hsr.rubik.redditclone.data;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
+import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
 import javax.faces.event.AjaxBehaviorEvent;
 
+import ch.hsr.rubik.redditclone.ServerManager;
 import ch.hsr.rubik.redditclone.UserBean;
 
-public class Submission implements Serializable {
+public class Submission implements Serializable, Comparable<Submission> {
     // FIXME change serialVersionUID, cannot generate it since Eclipse does not
     // find my class file x.x
     private static final long serialVersionUID = 1L;
@@ -19,8 +23,8 @@ public class Submission implements Serializable {
     private Date submissionDate;
     private String submittedByUser;
     private int votes;
-    private int numberOfComments;
     private boolean expandComments = false;
+    private int numberOfComments;
 
 	private List<String> userUpvotes;
     private List<String> userDownvotes;
@@ -244,6 +248,15 @@ public class Submission implements Serializable {
 
 	public void setExpandComments(boolean expandComments) {
 		this.expandComments = expandComments;
+	}
+
+	@Override
+	public int compareTo(Submission submissions) {
+		return submissions.votes-this.votes;
+	}
+	
+	public void sortComments(){
+		Collections.sort(comments);
 	}
 
 }

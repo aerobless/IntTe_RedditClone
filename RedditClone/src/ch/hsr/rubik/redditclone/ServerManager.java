@@ -8,6 +8,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLDecoder;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -76,6 +77,7 @@ public class ServerManager {
                 }
             System.out.println(new Date()
                     + " ScheduledSaveManager saving to disk...");
+           	Collections.sort(submissions);
             saveAll();
         }
     }   );
@@ -117,14 +119,25 @@ public class ServerManager {
     public boolean containsUser(String username, String password) {
         return users.contains(new User(username, password, null));
     }
+    
+    public boolean containsUser(String username) {
+    	for(int i = 0; i<users.size(); i++){
+    		if(users.get(i).getUsername().equals(username)){
+    			return true;
+    		}
+    	}
+    	return false;
+    }
 
     public void addUser(final User user) {
+       	Collections.sort(submissions);
         users.add(user);
         System.out.println("Added a new user, we're now counting "
                 + users.size() + " in our database.");
     }
 
     public void addSubmission(final Submission submission) {
+    	Collections.sort(submissions);
         submissions.add(submission);
         System.out.println("Added a new submission, we're now counting "
                 + submissions.size() + " in our database.");
@@ -206,5 +219,9 @@ public class ServerManager {
             System.out.println("UnsupportedEncodingException in ServerManager. (UTF-8)");
         }
         return decodedPath;
+    }
+    
+    public void sortSubmissions(){
+    	Collections.sort(submissions);
     }
 }

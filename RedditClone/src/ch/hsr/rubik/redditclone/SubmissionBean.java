@@ -114,6 +114,7 @@ public class SubmissionBean implements Serializable {
     
     public boolean showCommentsOfSubmission(Submission aSubmission){
     	submission = aSubmission;
+    	submission.sortComments();
     	submission.setExpandComments(true);
     	commentBean.setSubmission(aSubmission);
     	hideAllCommentsOnOtherPosts(aSubmission);

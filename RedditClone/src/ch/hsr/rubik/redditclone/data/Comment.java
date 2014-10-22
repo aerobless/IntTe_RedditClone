@@ -10,7 +10,7 @@ import javax.faces.event.AjaxBehaviorEvent;
 
 import ch.hsr.rubik.redditclone.UserBean;
 
-public class Comment implements Serializable{
+public class Comment implements Serializable, Comparable<Comment>{
 
 	private static final long serialVersionUID = 2L;
 	private String commentContent;
@@ -159,7 +159,10 @@ public class Comment implements Serializable{
 	public void setVotes(int votes) {
 		this.votes = votes;
 	}
-	
-	
-	
+
+	@Override
+	public int compareTo(Comment comment) {
+		System.out.println("compare");
+		return comment.votes-this.votes;
+	}
 }

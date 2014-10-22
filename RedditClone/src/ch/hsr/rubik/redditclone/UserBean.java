@@ -76,6 +76,7 @@ public class UserBean implements Serializable{
 	
 	public void login(AjaxBehaviorEvent event) {
 		System.out.println(username+" "+password);
+		manager.sortSubmissions();
 		if(manager.containsUser(username, password)){
 			System.out.println("user found");
 			setLoginRequired(false);
@@ -117,8 +118,20 @@ public class UserBean implements Serializable{
 	}
 	
 	private boolean verifyRegistrationInput() {
-		if(!(password.equals(passwordConfirm) && email.contains("@"))){
-			displayUserWarning("Make sure that your email adress contains an @ and your passwords match.");
+		if(manager.containsUser(username)){
+			displayUserWarning("Username already taken, chose a different username.");
+			return false;
+		} else if (!password.equals(passwordConfirm)){
+			displayUserWarning("Your passwords don't match.");
+			return false;
+		} else if(!(email.contains("@")&&email.contains("."))){
+			displayUserWarning("Please enter a valid email adress.");
+			return false;
+		} else if(password.equals("")){
+			displayUserWarning("Your password cannot be empty.");
+			return false;
+		} else if(password.length()<3){
+			displayUserWarning("Your password must be at least 3 characters long.");
 			return false;
 		}
 		return true;
@@ -134,6 +147,7 @@ public class UserBean implements Serializable{
 	}
 	
 	public String logout(){
+		manager.sortSubmissions();
 		invalidateSession();
 		redirect("site.xhtml");
 		return "ok";
