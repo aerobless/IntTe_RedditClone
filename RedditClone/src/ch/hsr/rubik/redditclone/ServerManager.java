@@ -93,27 +93,39 @@ public class ServerManager {
         users = new ArrayList<>();
         submissions = new ArrayList<>();
         
+        //Sample users
     	users.add(new User("theo", "123456", "theo@redditclone.com"));
         users.add(new User("marco", "123456", "marco@redditclone.com"));
         users.add(new User("daniela", "123456", "daniela@redditclone.com"));
 
-        submissions.add(new Submission("A cool new search engine",
-                "http://www.google.com", "theo"));
-        submissions.add(new Submission(
-                "A company that sells awesome computers",
-                "http://www.apple.com", "marco"));
-        submissions.add(new Submission(
-                "Like RedditClone but not as good looking..",
-                "http://www.reddit.com", "theo"));
-        
-        Submission test = new Submission(
-                "You unplugged your what?",
+        //Sample submissions
+        Submission sub1 = new Submission("A cool new search engine","http://www.google.com", "theo");
+        Submission sub2 = new Submission("A company that sells awesome computers","http://www.apple.com", "marco");
+        Submission sub3 = new Submission("Like RedditClone but not as good looking..", "http://www.reddit.com", "theo");
+        Submission sub4 = new Submission("You unplugged your what?",
                 "http://www.reddit.com/r/talesfromtechsupport/comments/2idaug/you_unplugged_your_what/",
                 "self.talesfromtechsupport");
-        ArrayList<Comment> testComments = new ArrayList<Comment>();
-        testComments.add(new Comment("test","test"));
-        test.setComments(testComments);
-        submissions.add(test);
+        Submission sub5 = new Submission("The day before a major release", "http://i.imgur.com/cIZ6uzh.png", "daniela");
+        
+        //Sample comments
+        sub1.addComment(new Comment("Google is awesome!", "marco"));
+        sub1.addComment(new Comment("Bing is better", "Bill Gates"));
+        sub2.addComment(new Comment("Buy more macs", "Steve Jobs"));
+        sub4.addComment(new Comment("LOL", "someone"));
+        sub4.addComment(new Comment("so funny", "someone else"));
+        sub4.addComment(new Comment("XD", "dude7234"));
+
+        //Sample votes
+        sub1.setVotes(4);
+        sub2.setVotes(3);
+        sub3.setVotes(2);
+        
+        //Add submissions
+        submissions.add(sub1);
+        submissions.add(sub2);
+        submissions.add(sub3);
+        submissions.add(sub4);
+        submissions.add(sub5);
     }
 
     public boolean containsUser(String username, String password) {

@@ -87,8 +87,8 @@
 						<h4 class="media-heading">
 							<a href="#{submission.url}">#{submission.title}</a>
 						</h4>
-						submitted #{submission.submissionDate} by
-						#{submission.submittedByUser}
+						<p style="color:#5E5E5E">submitted #{submission.submissionDate} by
+						#{submission.submittedByUser}</p>
 						
 						<!-- Link to expand all comments and the Post Comment Form -->
 						<h:form>
@@ -139,8 +139,9 @@
 								</h:form>
 							</div>
 								#{comment.commentContent} <br/>
+								<p style="color:#5E5E5E">
 								submitted #{comment.commentDate} by
-								#{comment.commentedByUser}
+								#{comment.commentedByUser}</p>
 							</div>
 						</li>
 					</ui:repeat>
