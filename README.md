@@ -27,10 +27,13 @@ This is a rudimentary time tracking. Please see the [commit-history](https://git
 |07.10.2014 | 5h  | Theo  | Improved bootstrap design, iterating through posts as a list, server is capable to store submissions/user as xml file, added upvote/downvote arrows |
 |08.10.2014 | 3h  | Theo  | Upvotes/Downvotes initial logic, storing server data in separate Thread |
 |08.10.2014 | 4h  | Marco | Correct Upvote/Downvote behaviour, added data object for submissions |
+|08.10.2014 | 4h  | Daniela | Added Data Class for comments, changings on site.xhtml to show comments |
 |09.10.2014 | 3h  | Marco | Improved submission data object, data object is now used instead of bean in ServerManager |
 |10.10.2014 | 3h  | Marco | Upvotes/Downvotes are coloured differently when a user voted |
+|12.10.2014 | 5h  | Daniela | Started to implement the logic to add Comments to a Submission |
 |15.10.2014 | 2h  | Theo  | Added user data object to store user data instead of userBean, added error messages (e.g. when entering the wrong password)|
+|15.10.2014 | 4h  | Daniela | Several changings on CommentBean, SubmissionBean, Submission and xhtml files to improve initial solution |
 |15.10.2014 | 2h  | Marco | Added internationalisation (translations) |
-|16.10.2014 | 10h | Daniela | Added commentBean, comments per submission etc. |
+|22.10.2014 | 2h  | Theo, Daniela | Posting a link or a comment and the up-/downvoting is only possible when logged in, correct number of comments is shown, added a sorting algorithm |
 |   |   |    |   |
 
