@@ -24,4 +24,8 @@ body {
     color: #9494ff;
 }
 
+.maxwidthField {
+    width: 300px
+}
+
 background-image: url("#{resource['img/glyphicons-halflings.png']}");
