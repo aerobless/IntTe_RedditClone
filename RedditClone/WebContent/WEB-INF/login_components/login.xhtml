@@ -33,11 +33,11 @@
 				<h:outputText value="Hello "></h:outputText>
 				<h:outputText value="#{userBean.username}"></h:outputText>
 			</span>
-			&#160; <!-- ugly fix for now -->
+			<h:outputText value="&#160;" />
 			<h:commandButton value="Submit new link" styleClass='btn btn-success'>
 				<f:ajax listener="#{userBean.showSubmissionPanel}" render="@all"/>
 			</h:commandButton>
-			&#160; <!-- ugly fix for now -->
+			<h:outputText value="&#160;" />
 			<h:commandButton value="Logout" action="#{userBean.logout}" styleClass='btn btn-default navbar-btn'></h:commandButton>
 		</h:panelGroup>
 	</h:form>

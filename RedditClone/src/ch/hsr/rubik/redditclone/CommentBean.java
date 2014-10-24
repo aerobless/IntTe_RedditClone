@@ -11,7 +11,7 @@ import javax.faces.event.AjaxBehaviorEvent;
 import ch.hsr.rubik.redditclone.data.Comment;
 import ch.hsr.rubik.redditclone.data.Submission;
 
-@ManagedBean(name="commentBean")
+@ManagedBean(name = "commentBean")
 @SessionScoped
 public class CommentBean {
 	private String commentContent;
@@ -19,19 +19,19 @@ public class CommentBean {
 	private Date commentDate;
 	private Submission submission;
 
-	@ManagedProperty(value="#{userBean}")
+	@ManagedProperty(value = "#{userBean}")
 	private UserBean user;
-	
-	public CommentBean(){
+
+	public CommentBean() {
 		user = (UserBean) FacesContext.getCurrentInstance()
-                .getExternalContext().getSessionMap().get("userBean");
+				.getExternalContext().getSessionMap().get("userBean");
 	}
 
 	public String getCommentContent() {
 		return commentContent;
 	}
 
-	public void setCommentContent(String commentContent) {
+	public void setCommentContent(final String commentContent) {
 		this.commentContent = commentContent;
 	}
 
@@ -39,7 +39,7 @@ public class CommentBean {
 		return commentedByUser;
 	}
 
-	public final void setCommentedByUser(String aCommentedByUser) {
+	public final void setCommentedByUser(final String aCommentedByUser) {
 		commentedByUser = aCommentedByUser;
 	}
 
@@ -47,31 +47,43 @@ public class CommentBean {
 		return commentDate;
 	}
 
-	public final void setCommentDate(Date aCommentDate) {
+	public final void setCommentDate(final Date aCommentDate) {
 		commentDate = aCommentDate;
 	}
-	
+
 	public Submission getSubmission() {
 		return submission;
 	}
-	public void setSubmission(Submission submission) {
+
+	public void setSubmission(final Submission submission) {
 		this.submission = submission;
 	}
+
 	public UserBean getUser() {
 		return user;
 	}
-	public void setUser(UserBean user) {
+
+	public void setUser(final UserBean user) {
 		this.user = user;
 	}
-	
-	public void addNewCommentToSubmission(AjaxBehaviorEvent event){
-		System.out.println("about to add comment");
-		System.out.println("commentBeans commentContent is: " + commentContent);
-		
-		Comment aComment = new Comment(commentContent, user.getUsername());
+
+	public void addNewCommentToSubmission(final AjaxBehaviorEvent event) {
+		Comment aComment = new Comment(commentContent, user.getUsername(), null);
 		submission.getComments().add(aComment);
 		setCommentContent("");
-        System.out.println("all done with this comment");
 	}
-	
+
+	public void addNewCommentToComment(final Comment parentComment) {
+		Comment subComment = new Comment(commentContent, user.getUsername(),
+				parentComment);
+		parentComment.addSubcomment(subComment);
+		// submission.getComments().add(subComment);
+		hideCommentBox(parentComment);
+	}
+
+	public void hideCommentBox(final Comment comment) {
+		comment.setShowReplyTextbox(false);
+		setCommentContent("");
+	}
+
 }

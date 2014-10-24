@@ -9,7 +9,7 @@ import java.util.List;
 import ch.hsr.rubik.redditclone.DefaultVoteBehavior;
 
 public class Submission extends DefaultVoteBehavior implements Serializable,
-		Comparable<Submission> {
+Comparable<Submission> {
 	private static final long serialVersionUID = -5870875309252757156L;
 	private String url;
 	private String title;
@@ -85,6 +85,21 @@ public class Submission extends DefaultVoteBehavior implements Serializable,
 
 	public List<Comment> getComments() {
 		return comments;
+	}
+
+	/**
+	 * Return the whole tree SINCE FUCKING JSF HAS NO EASY COMPONENT FOR TREES
+	 * OR USING RECURSION.
+	 * 
+	 * Each comment will know its hierarchy level.
+	 */
+	public List<Comment> getCommentTree() {
+		List<Comment> commentTreeAsList = new ArrayList<>();
+		for (Comment tempComment : comments) {
+			commentTreeAsList.add(tempComment);
+			commentTreeAsList.addAll(tempComment.getAllChildren());
+		}
+		return commentTreeAsList;
 	}
 
 	public void setComments(final List<Comment> comments) {

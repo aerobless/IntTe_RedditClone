@@ -26,7 +26,7 @@
 						the future.. or not. Maybe it will stay for all eternity. Reddit
 						is cool. This site is cool. I'm running out of things to write..
 						are you seriously still reading this? It would be better if you
-						were coding instead..</p>
+						were coding instead…</p>
 					<p>
 						<a class="btn btn-primary btn-lg" role="button"
 							href="https://github.com/aerobless/IntTe_RedditClone">Learn
@@ -68,7 +68,7 @@
 							<!-- Show the text in the same color as the up-/downvote arrow. Orange if upvoted, light blue if downvoted and grey if not voted yet -->
 							<br></br>
 							<h:outputText
-								styleClass="strong #{submission.userHasUpvoted(userBean) ? 'upvoted' : (submission.userHasDownvoted(userBean) ? 'downvoted' : 'no_vote')}"
+								styleClass="strong h4 #{submission.userHasUpvoted(userBean) ? 'upvoted' : (submission.userHasDownvoted(userBean) ? 'downvoted' : 'no_vote')}"
 								value="#{submission.votes}"></h:outputText>
 							<br></br>
 
@@ -88,15 +88,8 @@
 							<a href="#{submission.url}">#{submission.title}</a>
 						</h4>
 						<h:outputText style="color:#5E5E5E"
-							value="#{msgs.frontpage_submission_label_submitted} " />
-						<h:outputText style="color:#5E5E5E"
-							value="
-							 #{submission.submissionDate} " />
-						<h:outputText style="color:#5E5E5E"
-							value="#{msgs.frontpage_submission_label_submittedby} " />
-						<h:outputText style="color:#5E5E5E"
-							value="#{submission.submittedByUser}" />
-
+							value="#{msgs.frontpage_submission_label_submitted} #{submission.submissionDate} #{submission.submittedByUser}" />
+						
 						<!-- Link to expand all comments and the Post Comment Form -->
 						<h:form>
 							<h:commandLink
@@ -106,7 +99,8 @@
 									render="@all"></f:ajax>
 							</h:commandLink>
 						</h:form>
-					</div> <!-- Post Comment Form -->
+					</div>
+					<!-- Post Comment Form -->
 					<h:panelGroup
 						rendered="#{userBean.isLoggedIn()}">
 						<h:panelGroup rendered="#{submission.expandComments}"
@@ -116,12 +110,13 @@
 									src="/WEB-INF/submission_components/commentSubmission.xhtml" />
 							</div>
 						</h:panelGroup>
-					</h:panelGroup> <!-- all Comments -->
+					</h:panelGroup>
+					<!-- all Comments -->
 					<ui:repeat var="comment"
-						value="#{submission.comments}"
+						value="#{submission.commentTree}"
 						rendered="#{submission.expandComments}">
 						<li class="media no_bullets">
-							<div class="media-body col-sm-offset-1 col-sm-10">
+							<div class="media-body col-sm-offset-#{comment.hierarchyLevel + 1} col-sm-10">
 								<div class="pull-left">
 									<h:form id="voteblock-comment">
 										<h:panelGroup rendered="#{userBean.isLoggedIn()}">
@@ -136,7 +131,7 @@
 										<!-- Show the text in the same color as the up-/downvote arrow. Orange if upvoted, light blue if downvoted and grey if not voted yet -->
 										<br></br>
 										<h:outputText
-											styleClass="strong #{comment.userHasUpvoted(userBean) ? 'upvoted' : (comment.userHasDownvoted(userBean) ? 'downvoted' : 'no_vote')}"
+											styleClass="strong h4 #{comment.userHasUpvoted(userBean) ? 'upvoted' : (comment.userHasDownvoted(userBean) ? 'downvoted' : 'no_vote')}"
 											value="#{comment.votes}"></h:outputText>
 										<br></br>
 
@@ -153,6 +148,25 @@
 								#{comment.commentContent} <br />
 								<p style="color: #5E5E5E">submitted #{comment.commentDate}
 									by #{comment.commentedByUser}</p>
+
+								<h:panelGroup rendered="#{userBean.isLoggedIn()}">
+									<h:form>
+										<h:commandLink value="reply">
+											<f:ajax execute="@all"
+												listener="#{comment.setShowReplyTextbox(true)}"
+												render="@all" />
+										</h:commandLink>
+									</h:form>
+								</h:panelGroup>
+								<h:panelGroup rendered="#{comment.showReplyTextbox}"
+									id="submitCommentContainer">
+									<div class="container">
+										<ui:include
+											src="/WEB-INF/submission_components/commentOnComment.xhtml">
+											<ui:param name="comment" value="#{comment}" />
+										</ui:include>
+									</div>
+								</h:panelGroup>
 							</div>
 						</li>
 					</ui:repeat>

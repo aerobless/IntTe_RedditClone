@@ -6,7 +6,7 @@
 
 	<h:form class="form-horizontal" role="form">
 		<div class="form-group">
-			<h2 class="col-sm-offset-1">Submit a comment</h2>
+			<h2 class="col-sm-offset-2">Submit a comment</h2>
 			<label for="description" class="col-sm-2 control-label">Comment</label>
 			<div class="col-sm-10">
 				<h:inputTextarea value="#{commentBean.commentContent}"
@@ -19,7 +19,12 @@
 			<div class="col-sm-offset-2 col-sm-10">
 				<h:commandButton value="Submit Comment" styleClass='btn btn-primary'>
 					<f:ajax execute="@all"
-						listener="#{commentBean.addNewCommentToSubmission}" render="@all" />
+						listener="#{commentBean.addNewCommentToComment(comment)}" render="@all" />
+				</h:commandButton>
+				<h:outputText value="&#160;" />
+				<h:commandButton value="Cancel" styleClass='btn btn-warning'>
+					<f:ajax execute="@all"
+						listener="#{commentBean.hideCommentBox(comment)}" render="@all" />
 				</h:commandButton>
 			</div>
 		</div>
