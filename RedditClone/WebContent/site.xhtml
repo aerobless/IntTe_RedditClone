@@ -92,7 +92,7 @@
 						
 						<!-- Link to expand all comments and the Post Comment Form -->
 						<h:form>
-							<h:commandLink value = "#{submission.getNumberOfComments()} Comments">
+							<h:commandLink value = "#{submission.getNumberOfComments()} comments">
 								<f:ajax execute="@all" listener="#{submissionBean.showCommentsOfSubmission(submission)}" render="@all"></f:ajax>
 							</h:commandLink>
 						</h:form>
