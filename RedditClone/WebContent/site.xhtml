@@ -106,7 +106,8 @@
 									render="@all"></f:ajax>
 							</h:commandLink>
 						</h:form>
-					</div> <!-- Post Comment Form --> <h:panelGroup
+					</div> <!-- Post Comment Form -->
+					<h:panelGroup
 						rendered="#{userBean.isLoggedIn()}">
 						<h:panelGroup rendered="#{submission.expandComments}"
 							id="submitCommentContainer">
@@ -115,7 +116,8 @@
 									src="/WEB-INF/submission_components/commentSubmission.xhtml" />
 							</div>
 						</h:panelGroup>
-					</h:panelGroup> <!-- all Comments --> <ui:repeat var="comment"
+					</h:panelGroup> <!-- all Comments -->
+					<ui:repeat var="comment"
 						value="#{submission.comments}"
 						rendered="#{submission.expandComments}">
 						<li class="media no_bullets">
