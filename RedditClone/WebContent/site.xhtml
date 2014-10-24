@@ -71,7 +71,7 @@
 								styleClass="strong #{submission.userHasUpvoted(userBean) ? 'upvoted' : (submission.userHasDownvoted(userBean) ? 'downvoted' : 'no_vote')}"
 								value="#{submission.votes}"></h:outputText>
 							<br></br>
-							
+
 							<h:panelGroup rendered="#{userBean.isLoggedIn()}">
 								<!-- show downvote arrow in light blue if user has already downvoted, otherwise grey -->
 								<h:commandLink
@@ -87,61 +87,70 @@
 						<h4 class="media-heading">
 							<a href="#{submission.url}">#{submission.title}</a>
 						</h4>
-						<p style="color:#5E5E5E">submitted #{submission.submissionDate} by
-						#{submission.submittedByUser}</p>
-						
+						<h:outputText style="color:#5E5E5E"
+							value="#{msgs.frontpage_submission_label_submitted} " />
+						<h:outputText style="color:#5E5E5E"
+							value="
+							 #{submission.submissionDate} " />
+						<h:outputText style="color:#5E5E5E"
+							value="#{msgs.frontpage_submission_label_submittedby} " />
+						<h:outputText style="color:#5E5E5E"
+							value="#{submission.submittedByUser}" />
+
 						<!-- Link to expand all comments and the Post Comment Form -->
 						<h:form>
-							<h:commandLink value = "#{submission.getNumberOfComments()} comments">
-								<f:ajax execute="@all" listener="#{submissionBean.showCommentsOfSubmission(submission)}" render="@all"></f:ajax>
+							<h:commandLink
+								value="#{submission.getNumberOfComments()} #{msgs.frontpage_submission_label_numberofcomments_plural}">
+								<f:ajax execute="@all"
+									listener="#{submissionBean.showCommentsOfSubmission(submission)}"
+									render="@all"></f:ajax>
 							</h:commandLink>
 						</h:form>
-					</div>
-					<!-- Post Comment Form -->
-					<h:panelGroup rendered="#{userBean.isLoggedIn()}">
-						  <h:panelGroup rendered="#{submission.expandComments}"
-										id="submitCommentContainer">
+					</div> <!-- Post Comment Form --> <h:panelGroup
+						rendered="#{userBean.isLoggedIn()}">
+						<h:panelGroup rendered="#{submission.expandComments}"
+							id="submitCommentContainer">
 							<div class="container">
-								<ui:include src="/WEB-INF/submission_components/commentSubmission.xhtml" />
+								<ui:include
+									src="/WEB-INF/submission_components/commentSubmission.xhtml" />
 							</div>
-					</h:panelGroup>
-					</h:panelGroup>
-					<!-- all Comments -->
-					<ui:repeat var="comment" value="#{submission.comments}" rendered="#{submission.expandComments}">
+						</h:panelGroup>
+					</h:panelGroup> <!-- all Comments --> <ui:repeat var="comment"
+						value="#{submission.comments}"
+						rendered="#{submission.expandComments}">
 						<li class="media no_bullets">
 							<div class="media-body col-sm-offset-1 col-sm-10">
-							<div class="pull-left">
-								<h:form id="voteblock-comment">
-									<h:panelGroup rendered="#{userBean.isLoggedIn()}">
-										<!-- show upvote arrow in orange if user has already upvoted, otherwise grey -->
-										<h:commandLink
-											styleClass="glyphicon glyphicon-arrow-up #{comment.userHasUpvoted(userBean) ? 'upvoted' : 'no_vote'}">
-											<f:ajax execute="@all" listener="#{comment.upvote}"
-												render="voteblock-comment" />
-										</h:commandLink>
-									</h:panelGroup>
-		
-									<!-- Show the text in the same color as the up-/downvote arrow. Orange if upvoted, light blue if downvoted and grey if not voted yet -->
-									<br></br>
-									<h:outputText
-										styleClass="strong #{comment.userHasUpvoted(userBean) ? 'upvoted' : (comment.userHasDownvoted(userBean) ? 'downvoted' : 'no_vote')}"
-										value="#{comment.votes}"></h:outputText>
-									<br></br>
-		
-									<h:panelGroup rendered="#{userBean.isLoggedIn()}">
-										<!-- show downvote arrow in light blue if user has already downvoted, otherwise grey -->
-										<h:commandLink
-											styleClass="glyphicon glyphicon-arrow-down #{comment.userHasDownvoted(userBean) ? 'downvoted' : 'no_vote'}">
-											<f:ajax execute="@all" listener="#{comment.downvote}"
-												render="voteblock-comment" />
-										</h:commandLink>
-									</h:panelGroup>
-								</h:form>
-							</div>
-								#{comment.commentContent} <br/>
-								<p style="color:#5E5E5E">
-								submitted #{comment.commentDate} by
-								#{comment.commentedByUser}</p>
+								<div class="pull-left">
+									<h:form id="voteblock-comment">
+										<h:panelGroup rendered="#{userBean.isLoggedIn()}">
+											<!-- show upvote arrow in orange if user has already upvoted, otherwise grey -->
+											<h:commandLink
+												styleClass="glyphicon glyphicon-arrow-up #{comment.userHasUpvoted(userBean) ? 'upvoted' : 'no_vote'}">
+												<f:ajax execute="@all" listener="#{comment.upvote}"
+													render="voteblock-comment" />
+											</h:commandLink>
+										</h:panelGroup>
+
+										<!-- Show the text in the same color as the up-/downvote arrow. Orange if upvoted, light blue if downvoted and grey if not voted yet -->
+										<br></br>
+										<h:outputText
+											styleClass="strong #{comment.userHasUpvoted(userBean) ? 'upvoted' : (comment.userHasDownvoted(userBean) ? 'downvoted' : 'no_vote')}"
+											value="#{comment.votes}"></h:outputText>
+										<br></br>
+
+										<h:panelGroup rendered="#{userBean.isLoggedIn()}">
+											<!-- show downvote arrow in light blue if user has already downvoted, otherwise grey -->
+											<h:commandLink
+												styleClass="glyphicon glyphicon-arrow-down #{comment.userHasDownvoted(userBean) ? 'downvoted' : 'no_vote'}">
+												<f:ajax execute="@all" listener="#{comment.downvote}"
+													render="voteblock-comment" />
+											</h:commandLink>
+										</h:panelGroup>
+									</h:form>
+								</div>
+								#{comment.commentContent} <br />
+								<p style="color: #5E5E5E">submitted #{comment.commentDate}
+									by #{comment.commentedByUser}</p>
 							</div>
 						</li>
 					</ui:repeat>

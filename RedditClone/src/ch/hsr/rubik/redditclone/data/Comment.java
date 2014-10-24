@@ -9,8 +9,7 @@ import ch.hsr.rubik.redditclone.DefaultVoteBehavior;
 
 public class Comment extends DefaultVoteBehavior implements Serializable,
 Comparable<Comment> {
-
-	private static final long serialVersionUID = 2L;
+	private static final long serialVersionUID = -5190257344022025352L;
 	private String commentContent;
 	private List<Comment> comments;
 	private String commentedByUser;
@@ -18,10 +17,25 @@ Comparable<Comment> {
 	private int votes;
 
 	public Comment(final String commentContent, final String commentedByUser) {
-		super(new ArrayList<String>(), new ArrayList<String>());
+		this(commentContent, commentedByUser, new Date());
+	}
+
+	public Comment(final String commentContent, final String commentedByUser,
+			final Date commentDate) {
+		//@formatter:off
+		this(commentContent, commentedByUser, commentDate,
+				new ArrayList<String>() {{ add(commentedByUser); }},
+				new ArrayList<String>());
+		//@formatter:on
+	}
+
+	public Comment(final String commentContent, final String commentedByUser,
+			final Date commentDate, final List<String> userUpvotes,
+			final List<String> userDownvotes) {
+		super(userUpvotes, userDownvotes);
 		this.commentContent = commentContent;
 		this.commentedByUser = commentedByUser;
-		commentDate = new Date();
+		this.commentDate = commentDate;
 		comments = new ArrayList<>();
 		votes = 0;
 	}
