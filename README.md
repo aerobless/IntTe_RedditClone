@@ -37,5 +37,6 @@ This is a rudimentary time tracking. Please see the [commit-history](https://git
 |22.10.2014 | 2h  | Theo, Daniela | Posting a link or a comment and the up-/downvoting is only possible when logged in, correct number of comments is shown, added a sorting algorithm |
 |24.10.2014 | 2h  | Marco   | Extracted interface/abstract superclass for duplicated code (voting on things), general code cleanup |
 |24.10.2014 | 0.5h| Marco | Further i18n for frontpage |
+|24.10.2014 | 5h  | Marco   | Functionality for hierarchic comments  |
 |   |   |    |   |
 
