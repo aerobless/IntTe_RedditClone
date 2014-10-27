@@ -38,8 +38,8 @@ RedditClone is a project for the class InternetTechnology at [HSR](http://www.hs
 7. Unzip it: `sudo apt-get install unzip` then `unzip apache-tomcat-8.0.14.zip`
 8. Move tomcat to a proper location: `mv apache-tomcat-8.0.14 /opt/tomcat`
 9. Configure .bashrc: `vim ~/.bashrc` then add this line `export CATALINA_HOME=/opt/tomcat`at the end.
-10. Export the project in eclipse as a .war file and upload it via SFTP with filezilla into the folder `/opt/tomcat/webapps`
-11. Launch the server from the tomcat folder via `bash startup.sh` (perhaps you have to `chmod +x` the file). You should now be able to visit reddit in your browser via: `http://yourip:8080/RedditClone/faces/site.xhtml` Have fun.
+10. Export the project in eclipse as a .war file and upload it via SFTP with [filezilla](https://filezilla-project.org/) into the folder `/opt/tomcat/webapps`
+11. Launch the server from the tomcat folder via `bash startup.sh` (perhaps you have to `chmod +x` the file). You should now be able to visit RedditClone in your browser via: `http://yourip:8080/RedditClone/faces/site.xhtml`. Have fun.
 
 ##Time Tracking
 This is a rudimentary time tracking. Please see the [commit-history](https://github.com/aerobless/IntTe_RedditClone/commits/master) for more details.
