@@ -41,4 +41,4 @@ This is a rudimentary time tracking. Please see the [commit-history](https://git
 |24.10.2014 | 2h  | Marco | Extracted interface/abstract superclass for duplicated code (voting on things), general code cleanup |
 |24.10.2014 | 0.5h| Marco | Further i18n for frontpage |
 |24.10.2014 | 6h  | Marco | Functionality for hierarchic comments  |
-|27.10.2014 | 2h  | Theo  | Added resursive sorting & recursive counting of comments & some small cleanups |
+|27.10.2014 | 2h  | Theo  | Added recursive sorting & recursive counting of comments & some small cleanups. |
