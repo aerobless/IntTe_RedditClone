@@ -112,5 +112,20 @@ public class Comment extends DefaultVoteBehavior implements Serializable,
 	public String toString() {
 		return commentContent + "[" + hierarchyLevel + "]";
 	}
+	
+	public boolean hasChildren() {
+		return children.size() != 0;
+	}
+	
+	public int getNumberOfComments() {
+		int numberOfComments = 0;
+		for (Comment comment : children) {
+			if(comment.hasChildren()){
+				numberOfComments += comment.getNumberOfComments();
+			}
+		}
+		numberOfComments += children.size();
+		return numberOfComments;
+	}
 
 }

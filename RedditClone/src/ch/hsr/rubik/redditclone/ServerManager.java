@@ -22,20 +22,13 @@ import ch.hsr.rubik.redditclone.data.User;
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.StaxDriver;
 
-/*
- * This bean is accessible throughout the entire application (see UserBean login method for an example).
- * By setting eager=true we're making sure that this been gets initialized and user-data gets loaded
- * before the first users tries to visit our page. 
- * 
- * Edit: Removed eager=true because it ended up starting this bean multiple times.. will have to see if
- * there's another way to get this to start up early.
- */
 @ManagedBean(name = "serverManager")
 @ApplicationScoped
 public class ServerManager {
 	private ArrayList<User> users;
 	private ArrayList<Submission> submissions;
 
+	//Server Settings:
 	private final String USER_FILE = getJarDirectory("reddit_clone_users.xml");
 	private final String SUBMISSIONS_FILE = getJarDirectory("reddit_clone_submissions.xml");
 	private final int AUTOMATIC_SAVE_TIME_SECONDS = 30;
@@ -117,12 +110,17 @@ public class ServerManager {
 				"http://i.imgur.com/cIZ6uzh.png", "daniela");
 
 		// Sample comments
-		sub1.addComment(new Comment("Google is awesome!", "marco", null));
+		Comment com1 = new Comment("Google is awesome!", "marco", null);
 		sub1.addComment(new Comment("Bing is better", "Bill Gates", null));
 		sub2.addComment(new Comment("Buy more macs", "Steve Jobs", null));
 		sub4.addComment(new Comment("LOL", "someone", null));
 		sub4.addComment(new Comment("so funny", "someone else", null));
 		sub4.addComment(new Comment("XD", "dude7234", null));
+		
+		
+		// Sample comment of comment
+		com1.addSubcomment(new Comment("Ohai!","Larry Page", com1));
+		sub1.addComment(com1);
 
 		// Sample votes
 		sub1.setVotes(4);

@@ -77,7 +77,6 @@ public class CommentBean {
 		Comment subComment = new Comment(commentContent, user.getUsername(),
 				parentComment);
 		parentComment.addSubcomment(subComment);
-		// submission.getComments().add(subComment);
 		hideCommentBox(parentComment);
 	}
 

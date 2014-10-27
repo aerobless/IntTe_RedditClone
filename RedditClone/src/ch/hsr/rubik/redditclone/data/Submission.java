@@ -123,7 +123,14 @@ Comparable<Submission> {
 	}
 
 	public int getNumberOfComments() {
-		return comments.size();
+		int numberOfComments = 0;
+		for (Comment comment : comments) {
+			if(comment.hasChildren()){
+				numberOfComments += comment.getNumberOfComments();
+			}
+		}
+		numberOfComments += comments.size();
+		return numberOfComments;
 	}
 
 	public boolean isExpandComments() {

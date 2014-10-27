@@ -70,9 +70,6 @@ public abstract class DefaultVoteBehavior implements IVotable {
 				userUpvotes.remove(username);
 				decVotes();
 			}
-		} else {
-			// TODO: show error message that user isn't logged in.
-			System.out.println("User tried to vote but isn't logged in");
 		}
 	}
 
@@ -104,9 +101,6 @@ public abstract class DefaultVoteBehavior implements IVotable {
 				userDownvotes.remove(username);
 				incVotes();
 			}
-		} else {
-			// TODO: show error message that user isn't logged in.
-			System.out.println("User tried to vote but isn't logged in");
 		}
 	}
 
