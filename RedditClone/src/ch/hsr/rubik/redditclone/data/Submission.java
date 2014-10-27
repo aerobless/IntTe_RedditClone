@@ -148,6 +148,11 @@ Comparable<Submission> {
 
 	public void sortComments() {
 		Collections.sort(comments);
+		for (Comment comment : comments) {
+			if(comment.hasChildren()){
+				comment.sortComments();
+			}
+		}
 	}
 
 	public void addComment(final Comment comment) {

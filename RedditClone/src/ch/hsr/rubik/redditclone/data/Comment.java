@@ -2,6 +2,7 @@ package ch.hsr.rubik.redditclone.data;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -127,5 +128,13 @@ public class Comment extends DefaultVoteBehavior implements Serializable,
 		numberOfComments += children.size();
 		return numberOfComments;
 	}
-
+	
+	public void sortComments() {
+		Collections.sort(children);
+		for (Comment comment : children) {
+			if(comment.hasChildren()){
+				comment.sortComments();
+			}
+		}
+	}
 }
