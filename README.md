@@ -9,10 +9,13 @@ RedditClone is a project for the class InternetTechnology at [HSR](http://www.hs
  + Users can login with a username & password
  + Users can submit links (called submissions)
  + Upvote or downvote submissions
- + Users are limited to one up- or downvote per submission, they're allowed to change their vote at any time.
+ + Users are limited to one up- or downvote per submission, they're allowed to change their vote at any time
  + Add comments to submissions
+ + Hierarchical comments (or comments of comments of comments .. :P)
  + The number of upvotes is displayed for each submission
- + The server application is capable of starting a separate thread to backup its data as XML file to disk and to load that data on the next restart.
+ + The number of comments is displayed below the submission
+ + All submissions and comments are sorted based on their number of upvotes
+ + The server application is capable of starting a separate thread to backup its data as XML file to disk and to load that data on the next restart
  + RedditClone utilises Ajax wherever possible to reduce user-wait-time to a minimum. (Examples of Ajax are: Up/Downvotes, the submission panel & the login-action)
 
 ##Time Tracking
@@ -35,8 +38,7 @@ This is a rudimentary time tracking. Please see the [commit-history](https://git
 |15.10.2014 | 4h  | Daniela | Several changings on CommentBean, SubmissionBean, Submission and xhtml files to improve initial solution |
 |15.10.2014 | 2h  | Marco | Added internationalisation (translations) |
 |22.10.2014 | 2h  | Theo, Daniela | Posting a link or a comment and the up-/downvoting is only possible when logged in, correct number of comments is shown, added a sorting algorithm |
-|24.10.2014 | 2h  | Marco   | Extracted interface/abstract superclass for duplicated code (voting on things), general code cleanup |
+|24.10.2014 | 2h  | Marco | Extracted interface/abstract superclass for duplicated code (voting on things), general code cleanup |
 |24.10.2014 | 0.5h| Marco | Further i18n for frontpage |
-|24.10.2014 | 6h  | Marco   | Functionality for hierarchic comments  |
-|   |   |    |   |
-
+|24.10.2014 | 6h  | Marco | Functionality for hierarchic comments  |
+|27.10.2014 | 2h  | Theo  | Added resursive sorting & recursive counting of comments & some small cleanups |
