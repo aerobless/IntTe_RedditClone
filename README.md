@@ -2,8 +2,6 @@ RedditClone
 =================
 RedditClone is a project for the class InternetTechnology at [HSR](http://www.hsr.ch). It's the goal of this project to create a clone of the popular social link sharing site [Reddit](http://reddit.com) using [Java Server Faces technology](https://javaserverfaces.java.net/). Please be aware that RedditClone is not intended for use on a publicly accessible server, since we did not take any precautions regarding security.
 
-**Public Test Server:** http://reddit.w1nter.net:8080/RedditClone/faces/site.xhtml
-
 <img src="https://raw.githubusercontent.com/aerobless/IntTe_RedditClone/master/screenshots/scr02.png" alt="Screenshot">
 
 ##Features
