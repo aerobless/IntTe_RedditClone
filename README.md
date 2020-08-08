@@ -4,7 +4,7 @@ RedditClone is a project for the class InternetTechnology at [HSR](http://www.hs
 
 <img src="https://raw.githubusercontent.com/aerobless/IntTe_RedditClone/master/screenshots/scr02.png" alt="Screenshot">
 
-##Features
+## Features
  + Register new users
  + Users can login with a username & password
  + Users can submit links (called submissions)
