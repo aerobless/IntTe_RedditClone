@@ -18,7 +18,7 @@ RedditClone is a project for the class InternetTechnology at [HSR](http://www.hs
  + The server application is capable of starting a separate thread to backup its data as XML file to disk and to load that data on the next restart
  + RedditClone utilises Ajax wherever possible to reduce user-wait-time to a minimum. (Examples of Ajax are: Up/Downvotes, the submission panel & the login-action)
  
-##Installation
+## Installation
 1. Get our code: `git clone https://github.com/aerobless/IntTe_RedditClone.git`.
 2. Import the project in eclipse and add the following third party libraries in the folder `../git/IntTe_RedditClone/RedditClone/WebContent/WEB-INF/lib/[libraries here]`.
 
@@ -28,7 +28,7 @@ RedditClone is a project for the class InternetTechnology at [HSR](http://www.hs
 3. Include the libraries you just added in the project build path.
 4. Create a local tomcat8 server and run the project.
 
-##Remote Deployment
+## Remote Deployment
 1. Follow steps 1-4 to get the project working locally
 2. Get a server. You can create a free digital ocean server via [this link](https://www.digitalocean.com/?refcode=3c6fcdd7f9f2).
 3. If you're using [Digital Ocean](https://www.digitalocean.com/?refcode=3c6fcdd7f9f2) a small droplet with 512MB ram running Ubuntu will suffice.
@@ -41,7 +41,7 @@ RedditClone is a project for the class InternetTechnology at [HSR](http://www.hs
 10. Export the project in eclipse as a .war file and upload it via SFTP with [filezilla](https://filezilla-project.org/) into the folder `/opt/tomcat/webapps`
 11. Launch the server from the tomcat folder via `bash startup.sh` (perhaps you have to `chmod +x` the file). You should now be able to visit RedditClone in your browser via: `http://yourip:8080/RedditClone/faces/site.xhtml`. Have fun.
 
-##Time Tracking
+## Time Tracking
 This is a rudimentary time tracking. Please see the [commit-history](https://github.com/aerobless/IntTe_RedditClone/commits/master) for more details.
 
 |Date | Time spent | Name | Task |
